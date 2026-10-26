@@ -1,0 +1,14 @@
+import XLSX from 'xlsx';
+import {readFile,writeFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+const book=XLSX.readFile(fileURLToPath(new URL('../data/raw/ideb-2025/divulgacao_regioes_ufs_ideb_2025/divulgacao_regioes_ufs_ideb_2025.xlsx',import.meta.url)));
+const sheet=XLSX.utils.sheet_to_json(book.Sheets['UF e Regiões (EM)'],{header:1});
+const column=sheet[9].indexOf('VL_OBSERVADO_2025');
+const root=new URL('../public/data/',import.meta.url);
+const states=JSON.parse(await readFile(new URL('states.json',root),'utf8'));
+const norm=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
+const aliases={MS:'M. G. do Sul',RN:'R. G. do Norte',RS:'R. G. do Sul'};
+const rows=states.map(s=>{const r=sheet.find(r=>norm(r[0])===norm(aliases[s.uf]??s.name)&&/^Estadual/.test(r[1]));const value=Number(r?.[column]);if(!r||!Number.isFinite(value)||value<=0||value>10)throw Error(`Ideb ausente: ${s.uf}`);return{uf:s.uf,value}});
+const data=JSON.parse(await readFile(new URL('indicators.json',root),'utf8'));
+const education={id:'education',title:'Ideb · Ensino médio estadual',unit:'pontos · escala de 0 a 10',direction:'higher',period:'2025',source:'Inep · Ideb / rede estadual',sourceUrl:'https://download.inep.gov.br/ideb/resultados/divulgacao_regioes_ufs_ideb_2025.zip',collectedAt:new Date().toISOString(),status:'verified',note:'Recorte da rede estadual em todas as 27 UFs. O arquivo oficial disponível separa Total, Privada e Estadual; este recorte não representa toda a rede pública (federal e municipal). Não mistura redes no ranking.',rows};
+data.indicators=data.indicators.map(i=>i.id==='education'?education:i);await writeFile(new URL('indicators.json',root),JSON.stringify(data));console.log('Ideb estadual 2025:',rows.length,'UFs');

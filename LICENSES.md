@@ -1,0 +1,18 @@
+# Créditos e recursos
+
+- Cartografia Brasil: IBGE, API de malhas v3, https://servicodados.ibge.gov.br/api/docs/malhas?versao=3. Dados públicos oficiais simplificados; não é réplica técnica da malha original.
+- Países vizinhos: Natural Earth, domínio público, https://www.naturalearthdata.com/about/terms-of-use/. GeoJSON obtido do repositório oficial nvkelso/natural-earth-vector.
+- Bandeiras SVG: akagabi/bandeira-dos-estados-do-brasil, MIT, revisão 93624a385c870dc11a2ca686a89d3ab73b43538e. Licença integral em `public/flags/LICENSE.txt`. https://github.com/akagabi/bandeira-dos-estados-do-brasil
+- Interface: React, Vite, Three.js, React Three Fiber, Drei, D3 Geo, Radix UI, Lucide e padrões shadcn/ui. Licenças das dependências permanecem nos pacotes; componente Button adaptado do padrão shadcn/ui, MIT, https://github.com/shadcn-ui/ui/blob/main/LICENSE.
+- Rendimento: IBGE/PNAD, https://sidra.ibge.gov.br/tabela/7444.
+- Segurança: Ipea/Atlas da Violência, https://www.ipea.gov.br/atlasviolencia/.
+- Migração: IBGE/Censo 2022, https://sidra.ibge.gov.br/tabela/10159.
+- Notícias: apenas títulos, datas, veículo e links dos feeds públicos https://g1.globo.com/rss/g1/, 27 canais estaduais do mesmo portal, https://agenciabrasil.ebc.com.br/rss/ultimasnoticias/feed.xml e API aberta Agência IBGE Notícias https://servicodados.ibge.gov.br/api/v3/noticias/. Direitos editoriais dos respectivos autores e veículos; não reproduzimos artigos, resumos gerados por IA ou imagens. URLs exatas e estado da última coleta em `public/data/news.json`; catálogo de feeds em `scripts/news-feeds.mjs`.
+- Sem música de fundo por decisão do usuário; faixa anterior removida.
+- Efeitos: arquivos CC0, https://creativecommons.org/publicdomain/zero/1.0/, de Freesound: mariiao2, https://freesound.org/people/mariiao2/sounds/240676/; hja, https://freesound.org/people/hja/sounds/67286/; samfk360, https://freesound.org/people/samfk360/sounds/148897/; SuperPhat, https://freesound.org/people/SuperPhat/sounds/424630/; richwise, https://freesound.org/people/richwise/sounds/361403/; civvy, https://freesound.org/people/civvy/sounds/620392/; sidequesting, https://freesound.org/people/sidequesting/sounds/542568/. Previews públicos HQ redistribuídos sob a licença declarada. Edições: recorte, mixagem hospitalar e de disparos/moto, normalização, limitação suave de picos e fades. A rajada é foley criado em Ableton; a moto é gravação em pista, não registro de crime. O carrinho gravado é hospitalar de alimentos, não afirmamos ser uma maca. Fontes, autores, URLs e hashes dos arquivos originais em `public/audio/credits.json`; receitas em `public/audio/soundscapes.json`. Efeitos são ilustrações sonoras, sem vínculo com ocorrências de um estado.
+- Mortalidade geral: Ministério da Saúde/SIM, snapshot público DO24OPEN 2024, https://dadosabertos.saude.gov.br/dataset/sim/resource/f0bdf83f-708e-4de9-9582-959055844ae9; população estimada IBGE/SIDRA 6579, https://sidra.ibge.gov.br/tabela/6579. Publicamos apenas totais agregados por residência e taxas calculadas, com fontes e auditoria. Não afirmamos equivalência do arquivo à extração final do Tabnet.
+- Educação: Inep, Ideb 2025 do ensino médio estadual, arquivo oficial https://download.inep.gov.br/ideb/resultados/divulgacao_regioes_ufs_ideb_2025.zip. Não confundir esse recorte com toda a rede pública.
+- Referência estética: https://styles.refero.design/style/90ce5883-bb24-4466-93f7-801cd617b0d1. Síntese visual própria; catálogo não redistribuído.
+- Mockups: gerador integrado de imagens, referências conceituais, não fonte de geografia ou estatísticas.
+
+Este projeto não é órgão oficial nem tem vínculo institucional com as fontes.

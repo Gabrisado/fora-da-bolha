@@ -1,0 +1,66 @@
+import {Component,Suspense,useEffect,useMemo,useRef,useState,type ReactNode} from 'react';
+import {Canvas,useFrame,useThree} from '@react-three/fiber';
+import {Html,Line,OrbitControls,OrthographicCamera} from '@react-three/drei';
+import {BufferGeometry,Shape,Path,ExtrudeGeometry,Vector3,Mesh,MeshStandardMaterial,CanvasTexture,SRGBColorSpace,ClampToEdgeWrapping} from 'three';
+import type {OrbitControls as OrbitType} from 'three-stdlib';
+import {projection,rings,centerOf,path2d,type GeoFeature,type Geography,type StateInfo} from './geography';
+import type {Visual,Flow} from './domain';
+type Props={brazil:Geography;neighbors:Geography;states:StateInfo[];visuals:Record<string,Visual>;selected:string|null;onSelect:(uf:string)=>void;mode2d:boolean;onFallback:()=>void;reduced:boolean;reset:number;flows:Flow[]};
+function makeShapes(feature:GeoFeature){
+ return rings(feature).map(polygon=>{const shape=new Shape();polygon.forEach((ring,i)=>{
+  const p=i===0?shape:new Path();ring.forEach((point,j)=>{const [x,y]=projection(point as [number,number])!;j?p.lineTo(x,-y):p.moveTo(x,-y)});p.closePath();if(i)shape.holes.push(p);
+ });return shape;});
+}
+function StateMesh({feature,state,visual,selected,onSelect,reduced}:{feature:GeoFeature;state:StateInfo;visual:Visual;selected:boolean;onSelect:()=>void;reduced:boolean}){
+ const [hover,setHover]=useState(false),[flag,setFlag]=useState<import('three').Texture|null>(null);const group=useRef<import('three').Group>(null);
+ const shapes=useMemo(()=>makeShapes(feature),[feature]);
+ const geo=useMemo(()=>{const g=new ExtrudeGeometry(shapes,{depth:1,bevelEnabled:false,curveSegments:1});
+  g.computeBoundingBox();const b=g.boundingBox!,uv=g.getAttribute('uv'),positions=g.getAttribute('position');
+  for(let i=0;i<uv.count;i++)uv.setXY(i,(positions.getX(i)-b.min.x)/(b.max.x-b.min.x),(positions.getY(i)-b.min.y)/(b.max.y-b.min.y));return g;
+ },[shapes]);
+ useEffect(()=>()=>geo.dispose(),[geo]);
+ useEffect(()=>{let active=true;let texture:CanvasTexture|undefined;const image=new Image();image.onload=()=>{if(!active)return;const canvas=document.createElement('canvas');const compact=matchMedia('(pointer: coarse)').matches;canvas.width=compact?384:900;canvas.height=compact?256:600;const ctx=canvas.getContext('2d');if(!ctx)return;ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(image,0,0,canvas.width,canvas.height);texture=new CanvasTexture(canvas);texture.colorSpace=SRGBColorSpace;texture.wrapS=texture.wrapT=ClampToEdgeWrapping;setFlag(texture)};image.src=`./flags/${state.uf}.svg`;return()=>{active=false;texture?.dispose()}},[state.uf]);
+ useEffect(()=>()=>{flag?.dispose()},[flag]);
+ const material=useMemo(()=>[new MeshStandardMaterial({color:hover&&flag?'#ffffff':visual.color,roughness:.88,map:hover?flag:null}),new MeshStandardMaterial({color:visual.color,roughness:1})],[hover,flag,visual.color]);
+ useEffect(()=>()=>material.forEach(m=>m.dispose()),[material]);
+ useFrame((_,dt)=>{if(group.current){const goal=visual.height+(hover?.15:0);group.current.scale.z=reduced?goal:group.current.scale.z+(goal-group.current.scale.z)*Math.min(1,dt*9)}});
+ const center=centerOf(feature);
+ const outline=useMemo(()=>rings(feature).map(p=>p[0].map(c=>{const [x,y]=projection(c as [number,number])!;return [x,-y,1.005] as [number,number,number]})),[feature]);
+ return <group rotation={[-Math.PI/2,0,0]}><group ref={group} scale={[1,1,visual.height]}>
+  <mesh geometry={geo} material={material} onPointerOver={e=>{if(e.pointerType==='touch')return;e.stopPropagation();setHover(true);document.body.style.cursor='pointer'}} onPointerOut={()=>{setHover(false);document.body.style.cursor=''}} onClick={e=>{if(e.delta>6)return;e.stopPropagation();onSelect()}}/>
+  {outline.map((pts,i)=><Line key={i} points={pts} color={selected?'#e9eee9':hover?visual.color:'#172125'} lineWidth={hover||selected?1.5:.65}/>)}
+ </group>{hover&&<Html position={[center[0],-center[1],visual.height+.28]} rotation={[Math.PI/2,0,0]} center style={{pointerEvents:'none'}}><div className="map-tooltip">{state.name}<span>Clique para ver os dados</span></div></Html>}</group>;
+}
+function Borders({geo}:{geo:Geography}){const lines=useMemo(()=>geo.features.flatMap(f=>rings(f).map(p=>p[0].map(c=>{const [x,y]=projection(c as [number,number])!;return [x,.015,y] as [number,number,number]}))),[geo]);return <>{lines.map((p,i)=><Line key={i} points={p} color="#465055" lineWidth={.7} transparent opacity={.55}/>)}</>}
+function ContextStatus({onFallback}:{onFallback:()=>void}){const {gl}=useThree();useEffect(()=>{const lost=(event:Event)=>{event.preventDefault();onFallback()};gl.domElement.addEventListener('webglcontextlost',lost);return()=>gl.domElement.removeEventListener('webglcontextlost',lost)},[gl,onFallback]);return null}
+function CameraControl({reset,reduced}:{reset:number;reduced:boolean}){
+ const control=useRef<OrbitType>(null);const {camera,size,gl}=useThree();
+ const fit=Math.min(size.width/15.5,size.height/13);
+ const report=()=>{gl.domElement.dataset.cameraZoom=String(camera.zoom);gl.domElement.dataset.cameraAzimuth=String(control.current?.getAzimuthalAngle()??0)};
+ useEffect(()=>{camera.position.set(0,15,11);camera.lookAt(0,0,0);camera.zoom=fit;camera.updateProjectionMatrix();control.current?.target.set(0,0,0);control.current?.update();report()},[reset,camera,size]);
+ return <OrbitControls ref={control} onChange={report} enablePan={false} minPolarAngle={.15} maxPolarAngle={.85} minAzimuthAngle={-.4} maxAzimuthAngle={.4} minZoom={Math.max(3,fit*.65)} maxZoom={Math.max(30,fit*4)} enableDamping={!reduced} dampingFactor={.08}/>;
+}
+function Routes({flows,brazil,states,reduced}:{flows:Flow[];brazil:Geography;states:StateInfo[];reduced:boolean}){
+ const centers=useMemo(()=>Object.fromEntries(brazil.features.map(f=>[states.find(s=>s.id===f.properties.codarea)?.uf,centerOf(f)])),[brazil,states]);
+ const max=Math.max(1,...flows.map(f=>f.value));return <>{flows.map((flow,i)=>{const a=centers[flow.from],b=centers[flow.to];if(!a||!b)return null;return <Route key={flow.from+'-'+flow.to} a={a} b={b} index={i} width={.8+flow.value/max*2} reduced={reduced}/>})}</>;
+}
+function Route({a,b,index,reduced,width}:{a:number[];b:number[];index:number;reduced:boolean;width:number}){
+ const ref=useRef<import('three').Group>(null);const points=useMemo(()=>Array.from({length:41},(_,i)=>{const t=i/40;return new Vector3(a[0]+(b[0]-a[0])*t,.25+Math.sin(t*Math.PI)*1.6,a[1]+(b[1]-a[1])*t)}),[a,b]);
+ useFrame(({clock})=>{if(ref.current){const t=reduced?.5:(clock.elapsedTime*.12+index*.15)%1;const position=new Vector3(a[0]+(b[0]-a[0])*t,.25+Math.sin(t*Math.PI)*1.6,a[1]+(b[1]-a[1])*t);ref.current.position.copy(position);ref.current.lookAt(new Vector3(a[0]+(b[0]-a[0])*(t+.01),.25+Math.sin((t+.01)*Math.PI)*1.6,a[1]+(b[1]-a[1])*(t+.01)))}});
+ return <><Line points={points} color="#a9ceef" lineWidth={width}/><group ref={ref}><mesh rotation={[-Math.PI/2,0,0]}><coneGeometry args={[.035,.25,8]}/><meshStandardMaterial color="#edf3f3"/></mesh><mesh><boxGeometry args={[.27,.018,.07]}/><meshStandardMaterial color="#e5eff5"/></mesh><mesh position={[0,.025,-.08]}><boxGeometry args={[.1,.015,.035]}/><meshStandardMaterial color="#a9ceef"/></mesh></group></>;
+}
+class Boundary extends Component<{children:ReactNode;fallback:()=>void},{error:boolean}>{state={error:false};static getDerivedStateFromError(){return{error:true}}componentDidCatch(){this.props.fallback()}render(){return this.state.error?null:this.props.children}}
+export default function Atlas(props:Props){
+ const {brazil,neighbors,states,visuals,selected,onSelect,mode2d,onFallback,reduced,reset,flows}=props;
+ const [hovered,setHovered]=useState<string|null>(null);
+ const centers=Object.fromEntries(brazil.features.map(f=>[states.find(s=>s.id===f.properties.codarea)?.uf,centerOf(f)]));
+ if(mode2d)return <svg className="atlas-2d" viewBox="-7 -6 14 13" role="img" aria-label="Mapa interativo das unidades federativas do Brasil"><defs><marker id="route-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b9ddfa"/></marker>{brazil.features.map(f=>{const s=states.find(s=>s.id===f.properties.codarea)!;const pts=rings(f).flat(2).map(c=>projection(c as [number,number])!);const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);return <pattern key={s.uf} id={`flag-${s.uf}`} patternUnits="userSpaceOnUse" x={Math.min(...xs)} y={Math.min(...ys)} width={Math.max(...xs)-Math.min(...xs)} height={Math.max(...ys)-Math.min(...ys)}><image href={`./flags/${s.uf}.svg`} x={0} y={0} width={Math.max(...xs)-Math.min(...xs)} height={Math.max(...ys)-Math.min(...ys)} preserveAspectRatio="none"/></pattern>})}</defs><g>{neighbors.features.map((f,i)=><path key={i} d={path2d(f)??''} className="neighbor"/>)}{brazil.features.map(f=>{const s=states.find(s=>s.id===f.properties.codarea)!;return <path key={s.uf} data-uf={s.uf} d={path2d(f)??''} fill={hovered===s.uf?`url(#flag-${s.uf})`:visuals[s.uf]?.color??'#343e43'} stroke={selected===s.uf?'#ffffff':'#151d21'} strokeWidth={selected===s.uf?.05:.025} onPointerEnter={()=>setHovered(s.uf)} onPointerLeave={()=>setHovered(null)} onClick={()=>onSelect(s.uf)}><title>{s.name}</title></path>})}</g><g pointerEvents="none">{flows.map((f,index)=>{const a=centers[f.from],b=centers[f.to];if(!a||!b)return null;const d=`M${a[0]},${a[1]} Q${(a[0]+b[0])/2+.5},${Math.min(a[1],b[1])-.7} ${b[0]},${b[1]}`;return <g key={f.from+f.to}><path data-migration-route={`${f.from}-${f.to}`} d={d} fill="none" stroke="#b9ddfa" strokeWidth={.015+.035*f.value/Math.max(...flows.map(r=>r.value))} markerEnd="url(#route-arrow)"><title>{f.from} → {f.to}: {f.value} pessoas</title></path><g data-migration-plane={`${f.from}-${f.to}`} transform={reduced?`translate(${(a[0]+b[0])/2+.25},${(a[1]+b[1])*.25+(Math.min(a[1],b[1])-.7)*.5}) rotate(${Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI})`:undefined}>{!reduced&&<animateMotion path={d} dur={`${12+index%5}s`} begin={`-${index*1.7}s`} rotate="auto" repeatCount="indefinite"/>}<path d="M .14,0 L -.08,-.035 -.11,-.12 -.14,-.12 -.12,0 -.14,.12 -.11,.12 -.08,.035 Z M .015,0 L -.045,-.16 -.075,-.16 -.04,0 -.075,.16 -.045,.16 Z" fill="#e9f5ff" stroke="#8cafc6" strokeWidth=".007"/></g></g>})}</g></svg>;
+ return <Boundary fallback={onFallback}><Canvas dpr={matchMedia('(pointer: coarse)').matches?1.25:[1,1.7]} gl={{antialias:true,alpha:true}}>
+  <ContextStatus onFallback={onFallback}/><OrthographicCamera makeDefault position={[0,15,11]} zoom={50} near={.1} far={100}/><CameraControl reset={reset} reduced={reduced}/>
+  <ambientLight intensity={1.6}/><directionalLight position={[-6,15,8]} intensity={2.6}/><directionalLight position={[5,8,-8]} intensity={.5}/>
+  <gridHelper args={[60,70,'#283137','#20292e']} position={[0,-.02,0]}/><Borders geo={neighbors}/>
+  {brazil.features.map(f=>{const s=states.find(s=>s.id===f.properties.codarea)!;return <StateMesh key={s.uf} feature={f} state={s} visual={visuals[s.uf]??{height:.13,color:'#384248',rank:null,quality:null}} selected={selected===s.uf} onSelect={()=>onSelect(s.uf)} reduced={reduced}/>})}
+  <Routes flows={flows} brazil={brazil} states={states} reduced={reduced}/>
+  {(()=>{const df=brazil.features.find(f=>f.properties.codarea==='53');if(!df)return null;const [x,z]=centerOf(df);return <mesh position={[x,(visuals.DF?.height??.15)+.02,z]} rotation={[-Math.PI/2,0,0]} onClick={e=>{if(e.delta>6)return;e.stopPropagation();onSelect('DF')}}><circleGeometry args={[.16,12]}/><meshBasicMaterial transparent opacity={0} depthWrite={false}/></mesh>})()}
+ </Canvas></Boundary>;
+}

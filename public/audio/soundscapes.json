@@ -1,0 +1,41 @@
+[
+  {
+    "id": "health",
+    "seconds": 8,
+    "sources": [
+      "health",
+      "hospital-cart",
+      "heart-monitor"
+    ],
+    "license": "CC0",
+    "edits": "Recorte, mixagem, normalização com limite de pico e fades; fontes em credits.json."
+  },
+  {
+    "id": "security",
+    "seconds": 8,
+    "sources": [
+      "security-burst",
+      "motorcycle-limiter"
+    ],
+    "license": "CC0",
+    "edits": "Recorte, mixagem, normalização com limite de pico e fades; fontes em credits.json."
+  },
+  {
+    "id": "education",
+    "seconds": 6,
+    "sources": [
+      "education"
+    ],
+    "license": "CC0",
+    "edits": "Recorte, mixagem, normalização com limite de pico e fades; fontes em credits.json."
+  },
+  {
+    "id": "salary",
+    "seconds": 6,
+    "sources": [
+      "salary"
+    ],
+    "license": "CC0",
+    "edits": "Recorte, mixagem, normalização com limite de pico e fades; fontes em credits.json."
+  }
+]
