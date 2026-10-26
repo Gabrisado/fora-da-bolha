@@ -4,13 +4,15 @@ Atlas editorial brasileiro em 3D, com indicadores por estado, fontes consultáve
 
 ## Acessar o site
 
-O endereço previsto no GitHub Pages é **https://gabrisado.github.io/fora-da-bolha/**. A disponibilidade depende da conclusão do workflow de publicação, visível na aba Actions do repositório.
+**[Abrir Fora da bolha](https://gabrisado.github.io/fora-da-bolha/)** — acesso público, sem instalação.
+
+Publicado e verificado em 26/10/2026, em desktop e mobile com WebGL 3D ativo. Atualizações futuras passam pelo workflow de publicação na aba Actions do repositório.
 
 Funciona em desktop e em layout mobile, sem cadastro. Permita WebGL para usar o mapa 3D; há alternativa 2D quando ele não estiver disponível. Os efeitos sonoros são opcionais e a música está desativada.
 
 Dados e notícias são snapshots com datas e fontes visíveis. O site estático não coleta notícias sozinho: a rotina local deve gerar o cache, e uma nova publicação precisa enviar os arquivos atualizados. Não há serviço contínuo de coleta instalado no GitHub.
 
-Comentários, sugestões e problemas podem ser registrados nas **Issues** do repositório, preferencialmente com navegador, tamanho da tela, passos e captura do problema. Consulte as limitações abaixo antes de interpretar os indicadores.
+Comentários, sugestões e problemas podem ser registrados nas **[Issues do repositório](https://github.com/Gabrisado/fora-da-bolha/issues)**, preferencialmente com navegador, tamanho da tela, passos e captura do problema. Consulte as limitações abaixo antes de interpretar os indicadores.
 
 ## Publicação pelo GitHub Pages
 
@@ -82,6 +84,8 @@ Esta é uma entrega parcial do escopo global: ainda faltam Ideb público agregad
 
 Mobile: testes Chrome com viewport e toque emulados em 320×568, 360×640, 390×844, 412×915, 844×390 e 768×1024. Testes exigem WebGL ativo, canvas com espaço utilizável após o painel, ausência de overflow da página, quatro indicadores, fontes, notícias, áudio por gesto e migração. Eventos de toque do navegador verificam rotação, pinça/zoom, reset, seleção de UF no próprio 3D, rolagem do painel e troca de orientação. Casos adicionais verificam fallback sem WebGL e movimento reduzido. Não houve teste em aparelho físico ou Safari/iOS; desempenho nesses aparelhos não foi medido. Execute `npx playwright test e2e/mobile.spec.ts` com a prévia ativa.
 
-Nenhum login, backend de usuário, API paga, conta, domínio ou hospedagem foi criado.
+Sem login, backend de usuário, API paga ou domínio comprado. Hospedagem estática no GitHub Pages, com código público em [Gabrisado/fora-da-bolha](https://github.com/Gabrisado/fora-da-bolha).
+
+Para verificar a publicação pelo navegador automatizado, execute `node scripts/verify-publication.mjs` (requer Chrome instalado). Esse teste acessa o endereço público, verifica recursos sem erro HTTP, WebGL, seleção, migração e layout mobile, e guarda capturas em `design/visual-first`.
 
 Veja `LICENSES.md` e `docs/progress.md`.
