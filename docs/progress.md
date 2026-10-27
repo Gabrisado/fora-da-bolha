@@ -105,3 +105,6 @@ Desktop V4 aprovado pelo usuário: “otimo, pode iniciar”. Plano aprovado na 
 - Agendamento GitHub de seis em seis horas com cache validado, limpeza de miniaturas antigas, coleta/build/deploy na mesma cadeia e execução manual. Falha total simulada preservou news.json byte a byte.
 - Evidências desktop 1440×900 e mobile 390×844 em design/visual-first/painel-translucido; comparadas às propostas. Diferenças: geometria/cor seguem dados reais, manchetes e fotos dependem da cobertura autorizada; textos não imitam placeholders da proposta.
 - Validação final: 24 testes de lógica/dados, 21 cenários de navegador e build aprovados. Teste de falha total de 31 fontes preservou snapshot byte a byte. Foto real local decodificada em Chrome. Não testado em aparelho físico ou Safari/iOS.
+
+## Logo e favicon — 27/10/2026
+Logo aprovada aplicada ao cabeçalho, com texto alternativo e título acessível. Favicon derivado do símbolo do Brasil/bolha, PNG 32/48, ICO 16/32/48 e ícone Apple 180. Cabeçalho conferido em 320, 360, 390, 412, 768 e 1440 px, sem cortes ou overflow; ícones carregados com HTTP 200. Build e 24 testes de lógica aprovados.

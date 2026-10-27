@@ -17,3 +17,7 @@ Usuário: “aprovo desktop e mobile, implemente e publique tudo”. Desktop v2 
 - Desktop 1440×900: desktop-executado.png. Mobile 390×844: mobile-executado.png. Foto real autorizada: noticia-foto-real.png.
 - Conferência visual realizada; composição, painel compacto e hierarquia preservados. Geografia/cores seguem dados reais. Notícias e imagens dependem das fontes e licenças; não reproduzem os exemplos da proposta.
 - 24 testes de lógica/dados e 21 cenários de navegador aprovados, incluindo seis viewports mobile, WebGL, toque/pinça, gaveta, falha de foto e áudio. Build de produção aprovado. Não houve teste em aparelho físico/Safari.
+
+## Publicação conferida — 27/10/2026
+Commit 7e6842c publicado no endereço atual. Workflow por push 40517223590 concluiu com sucesso. Execução manual 40517250925 executou coleta, fotos, testes, build, cache e deploy.
+Site público conferido em Chrome desktop 1440×900 e mobile 390×844 com WebGL ativo. Painel de 360 px sem reduzir mapa, detalhes fora do painel e foto real da Agência Brasil decodificada. Capturas: publicado-desktop.png, publicado-mobile.png e publicado-foto-real.png.

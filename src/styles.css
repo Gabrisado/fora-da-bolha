@@ -62,3 +62,5 @@
 .news-card:has(.news-photo){display:flex;align-items:flex-start}.news-photo{flex:0 0 100px;width:100px;padding-top:12px;padding-left:10px}.news-photo img{height:auto;max-height:120px;object-fit:contain}.news-photo figcaption{padding:5px 0;font-size:8px}.news-card-content{min-width:0;flex:1}
 
 @media(min-width:901px){.state-line{flex-wrap:wrap;gap:14px}.state-line h2{order:3;flex-basis:100%;font-size:30px}.state-panel .indicator-title{font:17px/1.4 Georgia!important}.state-panel .indicator-value{font-size:53px}.state-panel{background-image:linear-gradient(135deg,#ffffff06,transparent 45%,#d3e8ee05)}}
+
+.masthead .brand-heading{display:flex;align-items:center;flex-shrink:0;line-height:1;width:280px;height:52px}.brand-logo{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}@media(max-width:900px){.masthead .brand-heading{width:232px;height:44px}}@media(max-width:359px){.masthead .brand-heading{width:202px;height:40px}.masthead{padding:0 8px;gap:0}.header-actions{gap:0}.header-actions>.button,.audio-container>.button{width:42px}}

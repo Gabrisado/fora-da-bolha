@@ -19,3 +19,6 @@ Este projeto não é órgão oficial nem tem vínculo institucional com as fonte
 
 ## Miniaturas de notícias
 Fotos próprias com autoria explícita da Agência Senado: reprodução permitida com fonte/autor, sem descaracterizar conteúdo (https://www12.senado.leg.br/assessoria-de-imprensa/guia-para-jornalistas/lista-dos-servicos-da-secom). Fotos próprias da Agência Brasil: uso gratuito com fotógrafo/Agência Brasil; excluem-se agências parceiras (https://www.gov.br/pt-br/servicos/acessar-material-fotojornalistico-gratuitamente). Cada miniatura tem URL original, crédito e referência da permissão no snapshot. Redimensionamento proporcional e compressão WebP, sem corte. Sem permissão/autor confirmado não há imagem. Identificação de veículos por nome/iniciais, sem logotipos de terceiros.
+
+## Marca Fora da bolha
+Logo e ícone originais gerados para o projeto com o gerador integrado, aprovados pelo usuário em 27/10/2026. Original em design/brand; versão WebP com transparência em public/brand. Favicon derivado do símbolo, disponibilizado em PNG/ICO, sem fontes ou marcas de terceiros incorporadas.
