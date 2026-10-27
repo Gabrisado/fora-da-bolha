@@ -23,11 +23,11 @@ test('navega temas, seleção única, modos e fontes',async({page})=>{
  await expect(page.getByRole('dialog')).toBeVisible();
  await page.screenshot({path:'design/visual-first/desktop/metodologia-executada.png',fullPage:true});
 });
-test('não fabrica fluxos de migração nem toca áudio sem ativação',async({page})=>{
+test('mantém migração real, sem música e sem opção de desligar efeitos',async({page})=>{
  await page.goto('/');await page.getByRole('button',{name:'Migração',exact:true}).click();
  await page.getByLabel('Selecionar unidade federativa').selectOption('SC');
  await expect(page.getByTestId('migration-status')).toBeVisible();
  await page.getByRole('button',{name:'Configurar áudio'}).click();
  await expect(page.getByRole('button',{name:'Ativar música'})).toHaveCount(0);
- await expect(page.getByRole('button',{name:'Efeitos desligados'})).toHaveAttribute('aria-pressed','false');
+ await expect(page.getByRole('button',{name:/Efeitos (ligados|desligados)/})).toHaveCount(0);
 });

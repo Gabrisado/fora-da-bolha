@@ -41,7 +41,7 @@ test('todos os arquivos sonoros decodificam e os efeitos não se sobrepõem',asy
   await expect(page.locator('audio[data-channel="effect"]')).toHaveCount(1);
   await expect.poll(()=>page.locator('audio[data-channel="effect"]').evaluate((a:HTMLAudioElement)=>!a.paused&&a.currentTime>0)).toBe(true);
  }
- await page.getByRole('button',{name:'Parar efeito'}).click();await expect(page.locator('audio[data-channel="effect"]')).toHaveCount(0);
+ await page.getByRole('button',{name:'Saúde',exact:true}).click();await expect(page.locator('audio[data-channel="effect"]')).toHaveCount(0);
  await page.screenshot({path:'design/visual-first/desktop/efeitos-sem-musica.png'});
 });
 test('Pará exibe bandeira no mapa 3D ao passar o mouse',async({page})=>{

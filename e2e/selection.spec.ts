@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 test('trocar estado corta o som e outro elegível reinicia imediatamente',async({page})=>{
  await page.goto('/');await page.getByRole('button',{name:'Segurança',exact:true}).click();
- await page.getByRole('button',{name:'Configurar áudio'}).click();await page.getByRole('button',{name:'Efeitos desligados',exact:true}).click();
+ 
  await page.getByLabel('Selecionar unidade federativa').selectOption('AP');
  const audio=page.locator('audio[data-channel="effect"]');await expect.poll(()=>audio.evaluate((a:HTMLAudioElement)=>a.currentTime)).toBeGreaterThan(.1);
  const first=await audio.elementHandle();await page.getByLabel('Selecionar unidade federativa').selectOption('BA');

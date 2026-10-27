@@ -8,7 +8,7 @@ Atlas editorial brasileiro em 3D, com indicadores por estado, fontes consultáve
 
 Publicado e verificado em 26/10/2026, em desktop e mobile com WebGL 3D ativo. Atualizações futuras passam pelo workflow de publicação na aba Actions do repositório.
 
-Funciona em desktop e em layout mobile, sem cadastro. Permita WebGL para usar o mapa 3D; há alternativa 2D quando ele não estiver disponível. Os efeitos sonoros são opcionais e a música está desativada.
+Funciona em desktop e em layout mobile, sem cadastro. Permita WebGL para usar o mapa 3D; há alternativa 2D quando ele não estiver disponível. Os efeitos sonoros são automáticos nos estados elegíveis, com volume fixo de 32%, sem opção de desativação no site. O navegador pode exigir uma interação para liberar a reprodução. Não há música.
 
 Dados e notícias são snapshots com datas e fontes visíveis. O site estático não coleta notícias sozinho: a rotina local deve gerar o cache, e uma nova publicação precisa enviar os arquivos atualizados. Não há serviço contínuo de coleta instalado no GitHub.
 
@@ -72,7 +72,7 @@ A rotina de atualização funciona somente enquanto o processo estiver aberto. A
 
 Notícias são coletadas no início de `npm run update:watch` e a cada 6 horas; nunca há busca externa a cada clique no estado. A página relê o JSON local a cada minuto para receber o cache renovado. Não é um serviço de notícias em tempo real com o computador desligado: operação contínua exige hospedagem/agendamento futuro. Falhas preservam artigos anteriores ainda válidos; datas inválidas, futuras ou fora de 30 dias são rejeitadas. Metadados por fonte e cobertura por UF/tema ficam no `news.json`.
 
-Trocar de estado interrompe imediatamente qualquer efeito. Se a nova UF estiver no grupo que ativa o efeito do indicador, ele reinicia do zero, inclusive em cliques rápidos; uma UF fora desse grupo fica em silêncio. Ao mudar de tema, desativar efeitos, ocultar a aba ou fechar a seleção, a reprodução também para.
+Trocar de estado interrompe imediatamente qualquer efeito. Se a nova UF estiver no grupo que ativa o efeito do indicador, ele reinicia do zero, inclusive em cliques rápidos; uma UF fora desse grupo fica em silêncio. Ao mudar de tema, ocultar a aba ou fechar a seleção, a reprodução também para.
 
 Os testes de navegador usam o Chrome instalado e a prévia ativa em `http://127.0.0.1:4182`. Essa porta pode ser ajustada em `playwright.config.ts` caso necessário. Scripts de atualização exigem internet; a navegação utiliza snapshots locais e assets empacotados.
 

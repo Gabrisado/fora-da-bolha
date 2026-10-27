@@ -22,7 +22,7 @@ for(const size of [{width:320,height:568},{width:360,height:640},{width:390,heig
   await page.getByRole('button',{name:'Expandir detalhes do estado'}).tap();await page.locator('.news').scrollIntoViewIfNeeded();await expect(page.locator('.news h3')).toBeVisible();
   await page.getByRole('button',{name:'Fechar painel do estado'}).tap();
   await page.getByRole('button',{name:'Configurar áudio'}).tap();await expect(page.getByRole('button',{name:'Disparos e moto'})).toBeVisible();
-  await page.getByRole('button',{name:'Sino escolar',exact:true}).tap();await expect.poll(()=>page.locator('audio[data-channel="effect"]').evaluate((a:HTMLAudioElement)=>!a.paused&&a.currentTime>0)).toBe(true);await page.getByRole('button',{name:'Parar efeito'}).tap();
+  await page.getByRole('button',{name:'Sino escolar',exact:true}).tap();await expect.poll(()=>page.locator('audio[data-channel="effect"]').evaluate((a:HTMLAudioElement)=>!a.paused&&a.currentTime>0)).toBe(true);
   const menu=await page.locator('.audio-menu').boundingBox();expect(menu!.x).toBeGreaterThanOrEqual(0);expect(menu!.x+menu!.width).toBeLessThanOrEqual(size.width+1);await page.getByRole('button',{name:'Configurar áudio'}).tap();
   await page.getByRole('button',{name:'Dados e fontes'}).tap();await expect(page.getByRole('dialog')).toBeVisible();await page.getByRole('button',{name:'Fechar metodologia'}).tap();
   for(const topic of ['Saúde','Segurança','Educação']){await page.getByRole('button',{name:topic,exact:true}).tap();await page.getByLabel('Selecionar unidade federativa').selectOption('SC');await expect(page.getByTestId('indicator-value')).not.toHaveText('—');await page.getByRole('button',{name:'Fechar painel do estado'}).tap()}

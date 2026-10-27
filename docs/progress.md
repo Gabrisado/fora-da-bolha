@@ -91,3 +91,9 @@ Desktop V4 aprovado pelo usuário: “otimo, pode iniciar”. Plano aprovado na 
 - Publicação contém apenas build estático. Node_modules, dist local, segredos/variáveis, microdados data/raw e arquivos temporários ignorados no Git; dados públicos normalizados, fontes, créditos, scripts, testes e documentação enviados. Não há atualização contínua dos snapshots no servidor: coleta requer execução e nova publicação.
 - Verificação do endereço público por Chrome: HTTP 200, sem recursos com erro HTTP ou exceções de página, WebGL ativo em desktop 1440×900 e mobile 390×844 com toque emulado. Seleção/rendimento, rotas e totais de migração, JSON com 702 pares e ausência de overflow conferidos. Script reproduzível em scripts/verify-publication.mjs.
 - Capturas públicas em design/visual-first/desktop/publicado.png e design/visual-first/mobile/publicado-390x844.png. Limites de dados e de teste em aparelho físico continuam documentados.
+
+## Ajuste de áudio e cursor — 26/10/2026
+- Efeitos automáticos em volume fixo de 32%; removidos controles de desligar, parar manualmente e zerar volume. Sem música. O navegador continua controlando a permissão de reprodução.
+- Tooltip do estado acompanha o cursor à esquerda em 3D e 2D, com proteção nas bordas e sem interceptar cliques; toque não abre tooltip.
+- A proposta do painel translúcido permanece aguardando aprovação e não foi implementada nesta alteração.
+- Verificação executada: build de produção, 19 testes de lógica/dados e 19 cenários de navegador aprovados, incluindo seis tamanhos mobile, gestos e interrupção imediata do áudio.
