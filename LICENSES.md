@@ -16,3 +16,6 @@
 - Mockups: gerador integrado de imagens, referências conceituais, não fonte de geografia ou estatísticas.
 
 Este projeto não é órgão oficial nem tem vínculo institucional com as fontes.
+
+## Miniaturas de notícias
+Fotos próprias com autoria explícita da Agência Senado: reprodução permitida com fonte/autor, sem descaracterizar conteúdo (https://www12.senado.leg.br/assessoria-de-imprensa/guia-para-jornalistas/lista-dos-servicos-da-secom). Fotos próprias da Agência Brasil: uso gratuito com fotógrafo/Agência Brasil; excluem-se agências parceiras (https://www.gov.br/pt-br/servicos/acessar-material-fotojornalistico-gratuitamente). Cada miniatura tem URL original, crédito e referência da permissão no snapshot. Redimensionamento proporcional e compressão WebP, sem corte. Sem permissão/autor confirmado não há imagem. Identificação de veículos por nome/iniciais, sem logotipos de terceiros.

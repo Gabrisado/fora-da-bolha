@@ -1,7 +1,7 @@
 export type Topic='explore'|'health'|'security'|'education'|'salary'|'migration';
 export type Row={uf:string;value:number|null;deaths?:number;population?:number};
 export type Flow={from:string;to:string;value:number};
-export type News={uf:string;topic:string;title:string;url:string;publishedAt:string;source:string;institutional:boolean};
+export type News={uf:string;topic:string;title:string;url:string;publishedAt:string;source:string;institutional:boolean;image?:{src:string;credit:string;originalUrl:string;permissionUrl:string};publisher?:{name:string;initials:string}};
 export type Indicator={id:Topic;title:string;unit:string;direction:'lower'|'higher';period:string;source:string;sourceUrl:string;populationSourceUrl?:string;collectedAt:string;note:string;rows:Row[];status:string};
 export type Visual={height:number;color:string;rank:number|null;quality:number|null};
 export function rankValues(rows:Row[],direction:'lower'|'higher'):Record<string,number>{
@@ -27,10 +27,11 @@ export function topFlows(flows:Flow[],uf:string,direction:'in'|'out'){
  return flows.filter(f=>f.from!==f.to&&Number.isFinite(f.value)&&f.value>0&&(direction==='in'?f.to===uf:f.from===uf)).sort((a,b)=>b.value-a.value).slice(0,5);
 }
 export function eligibleNews(rows:News[],uf:string,topic:string,now=new Date()){
- const seen=new Set<string>();return rows.filter(n=>{
+ const seen=new Set<string>();const sorted=rows.filter(n=>{
   const age=now.getTime()-Date.parse(n.publishedAt);let url:URL;try{url=new URL(n.url)}catch{return false}
   if(n.uf!==uf||n.topic!==topic||!['https:','http:'].includes(url.protocol)||!Number.isFinite(age)||age<0||age>30*86400000||seen.has(url.href))return false;
   seen.add(url.href);return true;
- }).sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt)).slice(0,5);
+ }).sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt));
+ const selected=sorted.slice(0,5);const illustrated=sorted.find(n=>n.image&&now.getTime()-Date.parse(n.publishedAt)<=86400000);if(illustrated&&!selected.some(n=>n.url===illustrated.url)&&selected.length===5)selected[4]=illustrated;return selected.sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt));
 }
 export const formatValue=(value:number|null,topic:Topic)=>value===null?'—':new Intl.NumberFormat('pt-BR',topic==='salary'?{style:'currency',currency:'BRL',maximumFractionDigits:0}:{maximumFractionDigits:topic==='education'?1:2}).format(value);

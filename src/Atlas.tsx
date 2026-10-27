@@ -62,7 +62,7 @@ export default function Atlas(props:Props){
  return <>{tooltip}<Boundary fallback={onFallback}><Canvas dpr={matchMedia('(pointer: coarse)').matches?1.25:[1,1.7]} gl={{antialias:true,alpha:true}}>
   <ContextStatus onFallback={onFallback}/><OrthographicCamera makeDefault position={[0,15,11]} zoom={50} near={.1} far={100}/><CameraControl reset={reset} reduced={reduced}/>
   <ambientLight intensity={1.6}/><directionalLight position={[-6,15,8]} intensity={2.6}/><directionalLight position={[5,8,-8]} intensity={.5}/>
-  <gridHelper args={[60,70,'#283137','#20292e']} position={[0,-.02,0]}/><Borders geo={neighbors}/>
+  <gridHelper args={[60,70,'#909090','#909090']} position={[0,-.04,0]} onUpdate={grid=>{const materials=Array.isArray(grid.material)?grid.material:[grid.material];materials.forEach(m=>{m.transparent=true;m.opacity=.08;m.depthWrite=false})}}/><Borders geo={neighbors}/>
   {brazil.features.map(f=>{const s=states.find(s=>s.id===f.properties.codarea)!;return <StateMesh key={s.uf} feature={f} state={s} visual={visuals[s.uf]??{height:.13,color:'#384248',rank:null,quality:null}} selected={selected===s.uf} onSelect={()=>onSelect(s.uf)} reduced={reduced} onHover={setHoverName}/>})}
   <Routes flows={flows} brazil={brazil} states={states} reduced={reduced}/>
   {(()=>{const df=brazil.features.find(f=>f.properties.codarea==='53');if(!df)return null;const [x,z]=centerOf(df);return <mesh position={[x,(visuals.DF?.height??.15)+.02,z]} rotation={[-Math.PI/2,0,0]} onClick={e=>{if(e.delta>6)return;e.stopPropagation();onSelect('DF')}}><circleGeometry args={[.16,12]}/><meshBasicMaterial transparent opacity={0} depthWrite={false}/></mesh>})()}

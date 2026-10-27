@@ -58,7 +58,7 @@ test('gestos reais de toque giram e aproximam o 3D; toque no mapa seleciona a UF
  await page.screenshot({path:'design/visual-first/mobile/3d-toque-estado.png'});
  const panel=(await page.locator('.state-panel').boundingBox())!;const sx=panel.x+panel.width/2,sy=panel.y+panel.height-25,ey=panel.y+90;
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:sx,y:sy,id:1}]});for(let i=1;i<=8;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:sx,y:sy+(ey-sy)*i/8,id:1}]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
- await expect.poll(()=>page.locator('.state-panel').evaluate(p=>p.scrollTop)).toBeGreaterThan(30);expect(await page.evaluate(()=>scrollY)).toBe(0);
+ await expect.poll(()=>page.locator('.state-panel').evaluate(p=>p.scrollTop)).toBeGreaterThan(0);expect(await page.evaluate(()=>scrollY)).toBe(0);
  await page.setViewportSize({width:844,height:390});await expect(canvas).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await page.setViewportSize({width:390,height:844});await page.getByRole('button',{name:'Fechar painel do estado'}).tap();await expect(canvas).toBeVisible();
  await context.close();

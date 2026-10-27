@@ -42,3 +42,5 @@ describe('fluxos e notícias',()=>{
   expect(eligibleNews([row,row,{...row,uf:'SP'},{...row,url:'javascript:alert(1)'},{...row,publishedAt:'inválida'}],'SC','health',new Date(date))).toHaveLength(1);
  });
 });
+
+describe('seleção editorial ilustrada',()=>{it('reserva foto autorizada recente sem exceder cinco cartões',()=>{const now=new Date('2026-10-27T12:00:00Z');const rows=Array.from({length:7},(_,i)=>({uf:'RJ',topic:'security',title:'Notícia '+i,url:'https://example.org/'+i,publishedAt:new Date(+now-i*3600000).toISOString(),source:'Fonte',institutional:false,...(i===6?{image:{src:'./news-media/a.webp',credit:'Autora',permissionUrl:'https://example.org/licenca',originalUrl:'https://example.org/foto'}}:{})}));const selected=eligibleNews(rows,'RJ','security',now);expect(selected).toHaveLength(5);expect(selected.some(n=>n.image)).toBe(true);expect(selected[0].title).toBe('Notícia 0')})});

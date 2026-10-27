@@ -68,9 +68,9 @@ Recursos sonoros locais em `public/audio`: créditos, fontes e hashes em `credit
 
 Mortalidade: baixe o ZIP indicado na auditoria para `data/raw/DO24OPEN_csv.zip`, execute `python scripts/aggregate-mortality.py` (Python 3.11+) e `node scripts/import-mortality.mjs`. Denominador oficial em `data/raw/population-2024.json`, SIDRA 6579/variável 9324. A agregação valida tipo de óbito, ano e residência e publica somente totais. O ZIP bruto não deve ser publicado junto ao site e está ignorado no Git. Não confundir a data do arquivo com o ano dos óbitos. Migração permanece a matriz completa de 702 pares; os saldos enviados pelo usuário foram comparados e coincidem, sem substituir rotas por totais.
 
-A rotina de atualização funciona somente enquanto o processo estiver aberto. Ao falhar a consulta, as séries existentes são preservadas. Não existe serviço agendado instalado no computador.
+A rotina local de indicadores funciona somente enquanto o processo estiver aberto. Ao falhar a consulta, as séries existentes são preservadas. Não existe serviço agendado instalado no computador.
 
-Notícias são coletadas no início de `npm run update:watch` e a cada 6 horas; nunca há busca externa a cada clique no estado. A página relê o JSON local a cada minuto para receber o cache renovado. Não é um serviço de notícias em tempo real com o computador desligado: operação contínua exige hospedagem/agendamento futuro. Falhas preservam artigos anteriores ainda válidos; datas inválidas, futuras ou fora de 30 dias são rejeitadas. Metadados por fonte e cobertura por UF/tema ficam no `news.json`.
+Notícias são coletadas no início de `npm run update:watch` e a cada 6 horas; nunca há busca externa a cada clique no estado. A página relê o JSON local a cada minuto para receber o cache renovado. No site publicado, o workflow GitHub atualiza o cache a cada seis horas mesmo com o computador desligado, sujeito a atrasos do agendador. Não é transmissão em tempo real. Falhas preservam artigos anteriores ainda válidos; datas inválidas, futuras ou fora de 30 dias são rejeitadas. Metadados por fonte e cobertura por UF/tema ficam no `news.json`.
 
 Trocar de estado interrompe imediatamente qualquer efeito. Se a nova UF estiver no grupo que ativa o efeito do indicador, ele reinicia do zero, inclusive em cliques rápidos; uma UF fora desse grupo fica em silêncio. Ao mudar de tema, ocultar a aba ou fechar a seleção, a reprodução também para.
 
@@ -89,3 +89,17 @@ Sem login, backend de usuário, API paga ou domínio comprado. Hospedagem estát
 Para verificar a publicação pelo navegador automatizado, execute `node scripts/verify-publication.mjs` (requer Chrome instalado). Esse teste acessa o endereço público, verifica recursos sem erro HTTP, WebGL, seleção, migração e layout mobile, e guarda capturas em `design/visual-first`.
 
 Veja `LICENSES.md` e `docs/progress.md`.
+
+## Painel editorial e atualização de notícias
+
+O painel de 360 px se sobrepõe ao mapa em desktop e vira gaveta recolhível no celular. Exibe apenas estado, indicador e valor; detalhes, período, ranking, limitações e CSV estão em **Dados e fontes**.
+
+Notícias: RSS estaduais do g1, Agência Brasil, API IBGE e Agência Senado. Até cinco itens por UF/tema na janela de 30 dias. Sem cobertura pertinente, o painel informa a ausência. Cartões mostram manchete, data e veículo; iniciais identificam fontes sem uso de logotipos não verificados. Não há resumos gerados por IA.
+
+Fotos próprias do Senado e da Agência Brasil são baixadas somente com crédito explícito e permissão institucional registrada no item (`image.originalUrl`, `credit`, `permissionUrl`). Miniaturas WebP preservam o quadro e são carregadas sob demanda; fotos ausentes, de terceiros ou indisponíveis deixam a notícia textual. `public/news-media/` fica fora do histórico Git e é recriada no build. Políticas: https://www12.senado.leg.br/assessoria-de-imprensa/guia-para-jornalistas/lista-dos-servicos-da-secom e https://www.gov.br/pt-br/servicos/acessar-material-fotojornalistico-gratuitamente.
+
+O workflow `Publicar Fora da bolha` executa a cada seis horas (e manualmente): recupera o último cache, coleta/valida notícias, prepara fotos autorizadas, testa, gera build e publica na mesma cadeia. Falha total da coleta bloqueia publicação agendada/manual, preservando o site anterior; falhas parciais mantêm itens válidos de fontes indisponíveis. Horários podem atrasar no GitHub; não é transmissão em tempo real. Artefato Pages retido por um dia; miniaturas antigas são removidas do cache. Não há requisição externa por clique.
+
+Para reproduzir: `npm run update:news`, `npm run prepare:news`, `npm test`, `npm run build`. Para validar fotos e falhas no navegador: `npx playwright test e2e/panel.spec.ts`.
+
+A seleção mantém até cinco manchetes recentes e reserva um cartão para a foto autorizada mais recente das últimas 24 horas, quando disponível; a ordem dos cartões permanece cronológica. Isso permite ilustrar a cobertura sem usar fotos de veículos cuja licença não foi confirmada.

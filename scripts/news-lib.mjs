@@ -2,7 +2,7 @@ export function mentionsState(text,name){
  const escaped=name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
  return new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`,'iu').test(text);
 }
-export const TOPICS={health:/saúde|hospital|vacina|\bsus\b|médic|mortalidade|posto de saúde|óbito/i,security:/segurança pública|homicíd|polícia|assassin|violência|crime|roubo|furto|assalto|prisão|preso/i,education:/educação|escola|ensino|ideb|professor|universidade|estudant/i,salary:/salário|rendimento|emprego|renda|trabalho|desemprego|remuneração/i};
+export const TOPICS={health:/saúde|hospital|vacina|\bsus\b|médic|mortalidade|posto de saúde|óbito/i,security:/segurança pública|homicíd|polícia|policiais|assassin|violência|crime|roubo|furto|assalto|prisão|preso/i,education:/educação|escola|ensino|ideb|professor|universidade|estudant/i,salary:/salário|rendimento|emprego|renda|trabalho|desemprego|remuneração/i};
 export const isElectionTable=title=>/resultado da votação|votos por local de votação/i.test(title);
 export function classifyTopics(article){
  const title=article.title??'',text=title+' '+(article.description??'');
@@ -26,3 +26,5 @@ export function mergeNewsCache(previous,fresh,now=new Date()){
  for(const item of [...previous,...fresh]){const article=normalizeArticle({title:item.title,url:item.url,date:item.publishedAt},now);if(!article)continue;map.set(item.uf+'|'+item.topic+'|'+article.url,{...item,title:article.title,url:article.url,publishedAt:article.publishedAt})}
  const titles=new Set();return [...map.values()].sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt)).filter(item=>{const key=item.uf+'|'+item.topic+'|'+item.title.toLocaleLowerCase('pt-BR');if(titles.has(key))return false;titles.add(key);return true});
 }
+
+export function feedExcerpt(value){let html=String(value??'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&amp;/g,'&');html=html.replace(/^\s*<p>\s*(?=<p)/i,'').replace(/^\s*<p[^>]*>\s*<a[^>]*>[\s\S]*?<\/a>\s*<\/p>/i,'');const opening=html.search(/<p\b/i);if(opening>=0&&!html.slice(0,opening).replace(/<[^>]*>/g,'').trim())html=html.slice(opening).replace(/^<p[^>]*>/i,'');return html.split(/<\/p>|Notícias relacionadas|\n\n/i)[0].replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,1600)}

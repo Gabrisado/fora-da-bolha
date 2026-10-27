@@ -97,3 +97,11 @@ Desktop V4 aprovado pelo usuário: “otimo, pode iniciar”. Plano aprovado na 
 - Tooltip do estado acompanha o cursor à esquerda em 3D e 2D, com proteção nas bordas e sem interceptar cliques; toque não abre tooltip.
 - A proposta do painel translúcido permanece aguardando aprovação e não foi implementada nesta alteração.
 - Verificação executada: build de produção, 19 testes de lógica/dados e 19 cenários de navegador aprovados, incluindo seis tamanhos mobile, gestos e interrupção imediata do áudio.
+
+## Painel editorial aprovado — 27/10/2026
+- Aprovação explícita de desktop v2 e mobile v1 registrada. Painel flutuante de 360 px, fundo 82%, blur, sem reduzir canvas; nome único, indicador curto e valor. Detalhes mantidos em Dados e fontes. Mobile mantém gaveta e WebGL.
+- Grade neutra em 8%, abaixo dos contornos e sem depthWrite. Áudio e tooltip preservados.
+- RSS Senado adicionado; leitura de HTML RSS aninhado corrigida; classificação versionada. Cartões horizontais, data, iniciais/nome de veículo; nenhuma imagem genérica. Fotos próprias de Senado/EBC exigem crédito e política de uso. Uma miniatura real da Agência Brasil preparada e decodificada em navegador, crédito Joédson Alves/Agência Brasil. Fotos binárias fora do Git, WebP proporcional sem corte.
+- Agendamento GitHub de seis em seis horas com cache validado, limpeza de miniaturas antigas, coleta/build/deploy na mesma cadeia e execução manual. Falha total simulada preservou news.json byte a byte.
+- Evidências desktop 1440×900 e mobile 390×844 em design/visual-first/painel-translucido; comparadas às propostas. Diferenças: geometria/cor seguem dados reais, manchetes e fotos dependem da cobertura autorizada; textos não imitam placeholders da proposta.
+- Validação final: 24 testes de lógica/dados, 21 cenários de navegador e build aprovados. Teste de falha total de 31 fontes preservou snapshot byte a byte. Foto real local decodificada em Chrome. Não testado em aparelho físico ou Safari/iOS.
