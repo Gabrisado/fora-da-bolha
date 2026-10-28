@@ -2,16 +2,15 @@ export function mentionsState(text,name){
  const escaped=name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
  return new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`,'iu').test(text);
 }
-export const TOPICS={health:/saúde|hospital|vacina|\bsus\b|médic|mortalidade|posto de saúde|óbito/i,security:/segurança pública|homicíd|polícia|policiais|assassin|violência|crime|roubo|furto|assalto|prisão|preso/i,education:/educação|escola|ensino|ideb|professor|universidade|estudant/i,salary:/salário|rendimento|emprego|renda|trabalho|desemprego|remuneração/i};
-export const isElectionTable=title=>/resultado da votação|votos por local de votação/i.test(title);
+export const TOPICS={health:/saúde|hospita(?:l|is).*?(?:atendimento|leitos|cirurgia|condenad|residência|agredid|ameaç)|(?:inaugura|amplia|reforma|obras).*hospita(?:l|is)|vacina|\bsus\b|atendimento médic|mortalidade|posto de saúde|óbito|epidemia|dengue/i,security:/segurança pública|homicíd|polícia|policiais|assassin|violência|crime|roubo|furto|assalto|prisão|tráfico|feminicíd/i,education:/educação|escola|ensino|ideb|universidade|matrícula|cursos? técnicos?|\bfies\b|\benem\b|merenda|aulas|oficina.*estudantes|alunos (?:usam|criam|aprendem|desenvolvem)/i,salary:/salário|rendimento|emprego|desemprego|remuneração|renda (?:média|do trabalho)|mercado de trabalho|carteira assinada|vagas? (?:de |para )?(?:emprego|trabalho)/i};
+export const isElectionTable=title=>/resultado.*votaç|votos por local de votação/i.test(title);
+export function isPromotional(url){try{return /especial-publicitario|conteudo-patrocinado|conteudo-de-marca|publieditorial|publicidade/i.test(new URL(url).pathname)}catch{return true}}
+// Conservative editorial gate: classify the headline, never incidental biography or related links.
 export function classifyTopics(article){
- const title=article.title??'',text=title+' '+(article.description??'');
- if(isElectionTable(title))return [];
- return Object.entries(TOPICS).filter(([topic,pattern])=>{
-  if(!pattern.test(text))return false;
-  if(topic==='education'&&/votação|zona eleitoral|seção eleitoral|local de votação|turno/i.test(title)&&!/ensino|ideb|professor|educação|aula|aluno|estudant|matrícula|universidade/i.test(title))return false;
-  return true;
- }).map(([topic])=>topic);
+ const title=String(article.title??'');
+ if(isElectionTable(title)||/morre aos|morreu aos|velório|sepultamento/i.test(title)||article.url&&isPromotional(article.url))return [];
+ const incidentalHealth=/(?:a caminho|se deslocava|seguia|ia para|levado|transferido).{0,65}(?:hospital|unidade de saúde)/i.test(title)&&!/falta de atendimento|fila de|acesso ao|tratamento|cirurgia|leitos/i.test(title);
+ return Object.entries(TOPICS).filter(([topic,pattern])=>!(topic==='health'&&incidentalHealth)&&pattern.test(title)&&!(topic==='education'&&/votação|zona eleitoral|seção eleitoral|local de votação/i.test(title))).map(([topic])=>topic);
 }
 export function normalizeArticle(article,now=new Date()){
  const entities={amp:'&',quot:'"',apos:"'",lt:'<',gt:'>',nbsp:' '};

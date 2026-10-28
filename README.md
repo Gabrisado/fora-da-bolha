@@ -103,3 +103,9 @@ O workflow `Publicar Fora da bolha` executa a cada seis horas (e manualmente): r
 Para reproduzir: `npm run update:news`, `npm run prepare:news`, `npm test`, `npm run build`. Para validar fotos e falhas no navegador: `npx playwright test e2e/panel.spec.ts`.
 
 A seleção mantém até cinco manchetes recentes e reserva um cartão para a foto autorizada mais recente das últimas 24 horas, quando disponível; a ordem dos cartões permanece cronológica. Isso permite ilustrar a cobertura sem usar fotos de veículos cuja licença não foi confirmada.
+
+## Revisão de prontidão — 27/10/2026
+
+Resultado independente: **APPROVED WITH RESERVATIONS**, sem achados importantes abertos nos critérios auditados. Relatório em docs/reviews/2026-10-27-market-readiness.md. Interface mantém a marca aprovada; ano/fonte e limites da mortalidade são visíveis, há tabela27UFs e fonte migratória.
+
+A triagem de notícias é automática e conservadora pelo assunto do título, exclui publicidade e revalida cache antigo. Não é curadoria manual ou classificação semântica infalível. Regressões cobrem os falsos positivos observados, e o frontend aplica a mesma proteção. Falhas locais/nacionais geram aviso de cobertura parcial sem apagar o cache válido. Sem comparação de fontes primárias refeita nesta rodada nem teste em aparelho físico/Safari/leitor de tela real.

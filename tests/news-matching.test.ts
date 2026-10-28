@@ -8,4 +8,4 @@ it('reconhece nomes de UF terminados em acento sem confundir outras palavras',()
 });
 
 import {feedExcerpt,classifyTopics} from '../scripts/news-lib.mjs';
-it('ignora logo RSS aninhado e notícias relacionadas',()=>{const intro=feedExcerpt('&lt;p&gt;&lt;p style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;x&quot;&gt;&lt;img src=&quot;logo&quot;&gt;&lt;/a&gt;&lt;/p&gt;Policiais atuam no Rio de Janeiro.&lt;/p&gt;&lt;p&gt;Notícias relacionadas: hospital no Pará&lt;/p&gt;');expect(intro).toContain('Rio de Janeiro');expect(intro).not.toContain('Pará');expect(classifyTopics({title:'Investigação',description:intro})).toContain('security')});
+it('ignora logo RSS aninhado e notícias relacionadas',()=>{const intro=feedExcerpt('&lt;p&gt;&lt;p style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;x&quot;&gt;&lt;img src=&quot;logo&quot;&gt;&lt;/a&gt;&lt;/p&gt;Policiais atuam no Rio de Janeiro.&lt;/p&gt;&lt;p&gt;Notícias relacionadas: hospital no Pará&lt;/p&gt;');expect(intro).toContain('Rio de Janeiro');expect(intro).not.toContain('Pará');expect(classifyTopics({title:intro})).toContain('security')});

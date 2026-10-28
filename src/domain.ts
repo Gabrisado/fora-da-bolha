@@ -1,3 +1,4 @@
+import {classifyTopics,isPromotional} from '../scripts/news-lib.mjs';
 export type Topic='explore'|'health'|'security'|'education'|'salary'|'migration';
 export type Row={uf:string;value:number|null;deaths?:number;population?:number};
 export type Flow={from:string;to:string;value:number};
@@ -29,9 +30,14 @@ export function topFlows(flows:Flow[],uf:string,direction:'in'|'out'){
 export function eligibleNews(rows:News[],uf:string,topic:string,now=new Date()){
  const seen=new Set<string>();const sorted=rows.filter(n=>{
   const age=now.getTime()-Date.parse(n.publishedAt);let url:URL;try{url=new URL(n.url)}catch{return false}
-  if(n.uf!==uf||n.topic!==topic||!['https:','http:'].includes(url.protocol)||!Number.isFinite(age)||age<0||age>30*86400000||seen.has(url.href))return false;
+  if(isPromotional(n.url)||!classifyTopics({title:n.title,url:n.url}).includes(n.topic)||n.uf!==uf||n.topic!==topic||!['https:','http:'].includes(url.protocol)||!Number.isFinite(age)||age<0||age>30*86400000||seen.has(url.href))return false;
   seen.add(url.href);return true;
  }).sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt));
  const selected=sorted.slice(0,5);const illustrated=sorted.find(n=>n.image&&now.getTime()-Date.parse(n.publishedAt)<=86400000);if(illustrated&&!selected.some(n=>n.url===illustrated.url)&&selected.length===5)selected[4]=illustrated;return selected.sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt));
 }
 export const formatValue=(value:number|null,topic:Topic)=>value===null?'—':new Intl.NumberFormat('pt-BR',topic==='salary'?{style:'currency',currency:'BRL',maximumFractionDigits:0}:{maximumFractionDigits:topic==='education'?1:2}).format(value);
+
+export type SourceStatus={uf:string|null;status:string;lastSuccess:string|null};
+export function newsHealth(sources:SourceStatus[]|undefined,uf:string,now=new Date()){if(!sources?.length)return 'Situação das fontes indisponível.';const local=sources.filter(s=>s.uf===uf),failed=local.some(s=>s.status!=='ok'),stale=local.some(s=>!s.lastSuccess||now.getTime()-Date.parse(s.lastSuccess)>86400000);if(failed||stale)return 'Cobertura parcial: fonte estadual indisponível ou desatualizada. Exibimos o último cache válido.';if(sources.some(s=>s.uf===null&&s.status!=='ok'))return 'Cobertura parcial: uma ou mais fontes nacionais estão indisponíveis.';return ''}
+
+export function nationalMortality(rows:Row[]){if(!rows.length||rows.some(r=>r.deaths===undefined||r.population===undefined||!Number.isFinite(r.deaths)||!Number.isFinite(r.population)||r.deaths<0||r.population<=0))return null;return rows.reduce((sum,r)=>sum+r.deaths!,0)/rows.reduce((sum,r)=>sum+r.population!,0)*100000}

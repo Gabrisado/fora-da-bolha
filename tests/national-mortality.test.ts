@@ -1,0 +1,2 @@
+import {it,expect} from 'vitest';import {nationalMortality} from '../src/domain';
+it('agrega mortalidade pelo denominador e não pela média de taxas',()=>{expect(nationalMortality([{uf:'A',value:10,deaths:10,population:100},{uf:'B',value:20,deaths:20,population:900}])).toBe(3000);expect(nationalMortality([{uf:'A',value:null}])).toBeNull();expect(nationalMortality([{uf:'A',value:0,deaths:0,population:0}])).toBeNull()});

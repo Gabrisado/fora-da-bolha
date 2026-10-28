@@ -1,0 +1,2 @@
+import {it,expect} from 'vitest';import {classifyTopics} from '../scripts/news-lib.mjs';
+it('distingue topônimos, biografias, animais e crimes de indicadores',()=>{for(const title of ['Presidente Médici (RO): resultado do local de votação por zonas eleitorais no 2º turno','Cavalo é resgatado após ficar preso em fossa','Médica e ex-deputada, saiba quem é Jéssica Sales','Professora é vítima de feminicídio em Pernambuco'])expect(classifyTopics({title})).not.toContain(/Professora/.test(title)?'education':/Cavalo/.test(title)?'security':'health')});

@@ -1,0 +1,2 @@
+import {it,expect} from 'vitest';import {newsHealth} from '../src/domain';
+it('distingue a fonte selecionada das nacionais e de outras UFs',()=>{const fresh=new Date().toISOString();const sources=[{uf:'AM',status:'ok',lastSuccess:fresh},{uf:'SP',status:'failed',lastSuccess:fresh},{uf:null,status:'ok',lastSuccess:fresh}];expect(newsHealth(sources,'AM')).toBe('');expect(newsHealth(sources,'SP')).toContain('fonte estadual');expect(newsHealth([...sources,{uf:null,status:'failed',lastSuccess:fresh}],'AM')).toContain('fontes nacionais')});
