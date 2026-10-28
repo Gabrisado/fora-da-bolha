@@ -25,3 +25,6 @@
 @media(min-width:901px){.state-panel{position:absolute;left:92px;top:16px;bottom:auto;width:360px;height:calc(100% - 32px);z-index:12}.state-panel.is-collapsed{height:126px}}
 @media(max-width:900px){.state-panel{position:absolute;top:auto;left:8px;right:8px;bottom:calc(var(--nav-height) + 8px);height:calc((100% - var(--nav-height)) * .56);width:auto}.state-panel.is-collapsed{height:64px}}
 @media(max-width:900px) and (orientation:landscape){.state-panel{left:auto;right:8px;top:8px;bottom:calc(var(--nav-height) + 8px);height:auto;width:310px}.state-panel.is-collapsed{height:auto;width:62px}}
+/* Larger touch targets with horizontal browsing instead of squeezing8icons. */
+@media(max-width:900px){.rail{justify-content:flex-start;gap:12px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scroll-snap-type:x proximity;scrollbar-width:none;padding-left:12px;padding-right:12px}.rail::-webkit-scrollbar{display:none}.rail .button{width:52px;min-width:52px;flex:0 0 52px;scroll-snap-align:center}.rail-bottom{flex:0 0 52px}.rail .button svg{width:23px}}
+@media(max-width:900px) and (orientation:landscape){.map-top{grid-column:1;grid-row:1}.map-toolbar{grid-column:2;grid-row:1}}

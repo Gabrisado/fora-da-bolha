@@ -60,21 +60,6 @@
     "changes": "Escala/orientação normalizadas; materiais adaptados e variantes de intensidade/cor."
   },
   {
-    "id": "coins",
-    "source": "https://poly.pizza/m/9OWkKczINo",
-    "file": "coins.glb",
-    "download": "https://static.poly.pizza/af8eccc6-bc94-4a31-a4dd-a2d2a1755735.glb.br",
-    "license": "CC0-1.0",
-    "bytes": 168888,
-    "triangles": 3220,
-    "sha256": "30b933c5fcd1fc7e6d0146efe41115ee18f9091ed81d6fa9a1594589dba3e671",
-    "meshes": [
-      "Coin_Pile"
-    ],
-    "author": "Quaternius",
-    "changes": "Escala/orientação normalizadas; materiais adaptados e variantes de intensidade/cor."
-  },
-  {
     "id": "pipes",
     "source": "https://poly.pizza/m/GB6AFkoiZb",
     "file": "pipes.glb",
@@ -116,5 +101,67 @@
     "author": "moriarty",
     "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
     "changes": "Normais suavizadas, material azul brilhante; escala/orientação normalizadas."
+  },
+  {
+    "id": "cross",
+    "file": "cross.glb",
+    "source": "https://poly.pizza/m/e8NCiLkLPg",
+    "author": "4444ESOUSA",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "bytes": 4252,
+    "triangles": 44,
+    "sha256": "6f55f9d51c752c7324eaea560c2525270635bbe998c6638c978d34454104402d",
+    "changes": "Escala, orientação e materiais adaptados ao mapa."
+  },
+  {
+    "id": "cash",
+    "file": "cash.glb",
+    "source": "https://poly.pizza/m/aLp0P2nXJ2",
+    "author": "J-Toastie",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "bytes": 160912,
+    "triangles": 2056,
+    "sha256": "3035bbd95aa9d663f7031434d67c7e08e5927b074abf08cceee360c5d1c87f0e",
+    "changes": "Escala, orientação e materiais adaptados ao mapa."
+  },
+  {
+    "id": "airplane",
+    "file": "airplane.glb",
+    "source": "https://poly.pizza/m/8ciDd9k8wha",
+    "author": "Poly by Google",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "bytes": 236520,
+    "triangles": 1772,
+    "sha256": "d18a06b336c49328b6dbd54bffd877592f2703a33e153167a436b5237dd6a7c1",
+    "changes": "Escala normalizada; rodas ocultadas para voo; orientação e tamanho adaptados. Imagem aérea renderizada do mesmo modelo para2D.",
+    "derivedFiles": [
+      "airplane-top.png"
+    ]
+  },
+  {
+    "id": "broken-pencil",
+    "file": "broken-pencil.glb",
+    "source": "https://poly.pizza/m/B1sopLfrVL",
+    "author": "Zsky",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "bytes": 25060,
+    "triangles": 190,
+    "sha256": "8e4d0229fde700a140fd7e3d8dd1e6a1c843db0cc000f5ab8e1c4da7c2236709",
+    "changes": "Lápis recortado em duas partes com faces de quebra, offsets e rotação; materiais originais preservados."
+  },
+  {
+    "source": "https://github.com/Gabrisado/fora-da-bolha/blob/main/src/model-workshop.ts",
+    "author": "Fora da bolha",
+    "license": "Original do projeto · ver LICENSES.md",
+    "id": "chart-down",
+    "file": "chart-down.glb",
+    "bytes": 18636,
+    "triangles": 152,
+    "sha256": "a75e8bc457a95a4b2772a891de05b2df0e5642067648e8bd6a84199a3140aa44",
+    "changes": "Geometria original extrudada de barras e seta descendente."
   }
 ]

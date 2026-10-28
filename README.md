@@ -122,6 +122,13 @@ A navegação tem destaque deslizante com Motion. As alturas e cores partem do r
 
 O cabeçalho mobile agrupa seletor e visualização na mesma linha. O canvas usa o espaço restante até a navegação inferior; legenda e centralização ficam sobre ele. O painel continua sobreposto e fecha ao tocar fora, sem redimensionar o mapa.
 
-Os sete modelos GLB locais somam 408.668 bytes e são carregados por tema. A gota de moriarty exige atribuição CC BY 3.0; os demais usam CC0. Veja `public/models/manifest.json` e `LICENSES.md`. Se algum modelo falhar, o mapa permanece disponível com símbolo estático e aviso. Nenhum modelo é carregado diretamente de um marketplace durante a visita.
+Os onze modelos GLB locais ativos somam685.104bytes e são carregados por tema. A gota de moriarty exige atribuição CC BY 3.0; os demais usam CC0. Veja `public/models/manifest.json` e `LICENSES.md`. Se algum modelo falhar, o mapa permanece disponível com símbolo estático e aviso. Nenhum modelo é carregado diretamente de um marketplace durante a visita.
 
 Verificações específicas: `npm test -- tests/map-motion.test.ts tests/model-assets.test.ts` e `npx playwright test e2e/polish.spec.ts`. Referências aprovadas, capturas e medições ficam em `design/visual-first/polish-v2/`. FrameEvidence existe apenas na prévia de desenvolvimento, para observar alturas reais; não é incluído na produção. Medições do Chrome emulado não representam desempenho de um celular físico.
+
+## RevisãoV3 de navegação e símbolos
+Título e descrição precedem o seletor. Navegação mobile tem alvos52px com12px de intervalo e rolagem horizontal por arraste; foco e seleção acompanham o item escolhido. Os novos símbolos aprovados são cruz, lápis quebrado, maços de dinheiro e gráfico3D descendente. A cruz representa menor expectativa de vida, não contagem de mortes; o gráfico simboliza menor rendimento neste recorte, não uma tendência temporal medida.
+
+Migração usa avião comercial de Poly by Google, com créditoCCBY3.0, sem rodas em voo. Uma renderização aérea do mesmo modelo é usada em2D. Rotas/valores oficiais e regras de entradas/saídas permanecem inalterados. Os novos importados (cruz, lápis e maços) também exigem atribuiçãoCCBY3.0, registrada no manifesto eLICENSES.md; o gráfico é original.
+
+Testes específicos: `npx playwright test e2e/navigation-v3.spec.ts e2e/symbols-v3.spec.ts`. Fonte da derivação do lápis e gráfico em `src/model-workshop.ts`; prévia/modelos/referência da prancha em `design/visual-first/symbols-v3/`.

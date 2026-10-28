@@ -1,0 +1,71 @@
+[
+  {
+    "id": "cross",
+    "file": "cross.glb",
+    "source": "https://poly.pizza/m/e8NCiLkLPg",
+    "author": "4444ESOUSA",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "bytes": 4252,
+    "triangles": 44,
+    "sha256": "6f55f9d51c752c7324eaea560c2525270635bbe998c6638c978d34454104402d"
+  },
+  {
+    "id": "pencil",
+    "file": "pencil.glb",
+    "source": "https://poly.pizza/m/B1sopLfrVL",
+    "author": "Zsky",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "bytes": 14268,
+    "triangles": 126,
+    "sha256": "fc92e77ac407ec0e04e03edfcd3cdcd8a9d3890d79b1cb687b5ba3c425fc2ae3",
+    "preview": {
+      "bytes": 25004,
+      "triangles": 190
+    }
+  },
+  {
+    "id": "cash",
+    "file": "cash.glb",
+    "source": "https://poly.pizza/m/aLp0P2nXJ2",
+    "author": "J-Toastie",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "bytes": 160912,
+    "triangles": 2056,
+    "sha256": "3035bbd95aa9d663f7031434d67c7e08e5927b074abf08cceee360c5d1c87f0e"
+  },
+  {
+    "id": "airplane",
+    "file": "airplane.glb",
+    "source": "https://poly.pizza/m/8ciDd9k8wha",
+    "author": "Poly by Google",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "bytes": 236520,
+    "triangles": 1772,
+    "sha256": "d18a06b336c49328b6dbd54bffd877592f2703a33e153167a436b5237dd6a7c1"
+  },
+  {
+    "id": "airplane-alt",
+    "file": "airplane-alt.glb",
+    "source": "https://poly.pizza/m/8VysVKMXN2J",
+    "author": "Poly by Google",
+    "license": "CC-BY-3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "bytes": 377648,
+    "triangles": 1770,
+    "sha256": "2f9a5382e70bdbef5d54024c6846a3a53389b889d73121159fb335352d311388"
+  },
+  {
+    "id": "chart",
+    "file": "chart-down.glb",
+    "source": "Original do projeto",
+    "author": "Fora da bolha",
+    "license": "Original do projeto",
+    "bytes": 18636,
+    "triangles": 152,
+    "sha256": "a75e8bc457a95a4b2772a891de05b2df0e5642067648e8bd6a84199a3140aa44"
+  }
+]

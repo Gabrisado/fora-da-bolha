@@ -29,3 +29,12 @@ Logo e ícone originais gerados para o projeto com o gerador integrado, aprovado
 - Fontes individuais, tamanhos, contagem de triângulos, hashes e modificações: `public/models/manifest.json`. Arquivos GLB locais; não utilizamos embeds dos marketplaces.
 - Fluxo verde complementar e animações foram criados em código para este projeto. São ilustrações, não registros de despejos ou potabilidade.
 - Motion for React: MIT; licença distribuída com a dependência `motion`.
+
+## Símbolos V3 e aviação
+- Cross, de4444ESOUSA: https://poly.pizza/m/e8NCiLkLPg.
+- Pencil, deZsky: https://poly.pizza/m/B1sopLfrVL. Adaptado em duas metades com faces de quebra e rotação.
+- Cash Stack, deJ-Toastie: https://poly.pizza/m/aLp0P2nXJ2.
+- Airplane, dePoly by Google: https://poly.pizza/m/8ciDd9k8wha. Normalizado para voo, rodas ocultadas e imagem aérea renderizada para o modo2D.
+- Os quatro modelos acima usam Creative Commons Attribution3.0: https://creativecommons.org/licenses/by/3.0/. Fontes, hashes, tamanhos e adaptações no manifesto público.
+- Gráfico descendente: geometria original do projeto, construída em src/model-workshop.ts. Não representa uma série temporal medida: é símbolo do menor rendimento no recorte selecionado.
+- A cruz é símbolo dos menores valores de expectativa de vida, não contagem ou taxa de óbitos.
