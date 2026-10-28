@@ -34,6 +34,7 @@ for(const size of [{width:320,height:568},{width:360,height:640},{width:390,heig
 }
 test('gestos reais de toque giram e aproximam o 3D; toque no mapa seleciona a UF',async({browser})=>{
  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const page=await context.newPage();
+ await page.route('**/data/news.json',route=>route.fulfill({json:{updatedAt:new Date().toISOString(),items:Array.from({length:5},(_,i)=>({uf:'PA',topic:'salary',title:'Feirão de emprego no Pará oferece novas oportunidades '+i,url:'https://example.org/emprego/'+i,publishedAt:new Date().toISOString(),source:'Fixture de rolagem',institutional:false}))}}));
  await page.goto('http://127.0.0.1:4182/');await page.getByRole('button',{name:'Salário',exact:true}).tap();await page.waitForLoadState('networkidle');
  const canvas=page.locator('canvas');await expect(canvas).toHaveAttribute('data-camera-zoom',/.+/);const box=(await canvas.boundingBox())!;
  const cdp=await context.newCDPSession(page),cx=box.x+box.width/2,cy=box.y+box.height/2;

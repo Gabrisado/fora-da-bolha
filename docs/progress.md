@@ -108,3 +108,6 @@ Desktop V4 aprovado pelo usuário: “otimo, pode iniciar”. Plano aprovado na 
 
 ## Logo e favicon — 27/10/2026
 Logo aprovada aplicada ao cabeçalho, com texto alternativo e título acessível. Favicon derivado do símbolo do Brasil/bolha, PNG 32/48, ICO 16/32/48 e ícone Apple 180. Cabeçalho conferido em 320, 360, 390, 412, 768 e 1440 px, sem cortes ou overflow; ícones carregados com HTTP 200. Build e 24 testes de lógica aprovados.
+
+## Painel mobile sobre o mapa — 27/10/2026
+O painel estadual flutua sobre o mapa sem alterar dimensões, zoom ou enquadramento do canvas. Tem rolagem própria, recolhimento e fechamento pelo botão ou toque fora no mapa. Retrato: painel arredondado inferior com56% da área de trabalho; paisagem: painel lateral sobreposto. Testes de regressão em390×844,320×568 e844×390 exigem dimensões idênticas do mapa antes/depois. Verificação:12cenários mobile e29testes de lógica aprovados; build aprovado. Evidência em design/review-2026-10-27/corrected/mobile-overlay.png.
