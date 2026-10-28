@@ -148,10 +148,10 @@
     "author": "Zsky",
     "license": "CC-BY-3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-    "bytes": 25060,
+    "bytes": 25112,
     "triangles": 190,
-    "sha256": "8e4d0229fde700a140fd7e3d8dd1e6a1c843db0cc000f5ab8e1c4da7c2236709",
-    "changes": "Lápis recortado em duas partes com faces de quebra, offsets e rotação; materiais originais preservados."
+    "sha256": "de7cdd2c71d31512106f39101983ea15bb7ad6db70b6f72aa11cf5b8ce2506bc",
+    "changes": "Lápis recortado em duas partes com faces de quebra, offsets e rotação; materiais originais preservados. Revisão de legibilidade: corpo4× mais espesso, maior abertura de quebra e tamanho projetado42px/mobile,52px/desktop; cores preservadas. Borracha rosa, ferragem prateada e grafite escuro com contraste reforçado. Ponta e borracha alongadas para identificação em escala pequena; abertura calibrada."
   },
   {
     "source": "https://github.com/Gabrisado/fora-da-bolha/blob/main/src/model-workshop.ts",
