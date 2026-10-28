@@ -1,0 +1,120 @@
+[
+  {
+    "id": "heart",
+    "source": "https://poly.pizza/m/1yCRUwFnwX",
+    "file": "heart.glb",
+    "download": "https://static.poly.pizza/a53d4e74-46dd-43d3-9815-82cef1fa8ccc.glb.br",
+    "license": "CC0-1.0",
+    "bytes": 13984,
+    "triangles": 160,
+    "sha256": "a4acac986a8d557aa1bd9ffad4291ec26c7e49f6faaa716943c22394f42f5793",
+    "meshes": [
+      "Heart_Full"
+    ],
+    "author": "Quaternius",
+    "changes": "Escala/orientação normalizadas; materiais adaptados e variantes de intensidade/cor."
+  },
+  {
+    "id": "shield",
+    "source": "https://poly.pizza/m/BnPGALOLoK",
+    "file": "shield.glb",
+    "download": "https://static.poly.pizza/8cd04807-f44d-48b2-8acb-fc975a5a4171.glb.br",
+    "license": "CC0-1.0",
+    "bytes": 80260,
+    "triangles": 583,
+    "sha256": "e72c56130326eaeeaac16186231824981a8ff0bbf023e3e41a9e4f9f4b493088",
+    "meshes": [
+      "Police_Shield"
+    ],
+    "author": "CreativeTrio",
+    "changes": "Escala/orientação normalizadas; materiais adaptados e variantes de intensidade/cor."
+  },
+  {
+    "id": "pistol",
+    "source": "https://poly.pizza/m/Z7aOjJu583",
+    "file": "pistol.glb",
+    "download": "https://static.poly.pizza/b0e55406-4b7b-486b-8af7-2d71c681791b.glb.br",
+    "license": "CC0-1.0",
+    "bytes": 79648,
+    "triangles": 1442,
+    "sha256": "6dc98cf2e44dc8cd052e402d72b5fe21af70afbfc48a70f3139e22008991fd47",
+    "meshes": [
+      "Pistol_3"
+    ],
+    "author": "Quaternius",
+    "changes": "Escala/orientação normalizadas; materiais adaptados e variantes de intensidade/cor."
+  },
+  {
+    "id": "book",
+    "source": "https://poly.pizza/m/FsCIGEfTEs",
+    "file": "book.glb",
+    "download": "https://static.poly.pizza/8127840e-d767-4dbf-89a8-1aad1fffed13.glb.br",
+    "license": "CC0-1.0",
+    "bytes": 34976,
+    "triangles": 592,
+    "sha256": "5e2341d6a227f5cffd4b9118388a34e2f8f0b875401e3f6dd35b399ff7cafb05",
+    "meshes": [
+      "Book2_Open"
+    ],
+    "author": "Quaternius",
+    "changes": "Escala/orientação normalizadas; materiais adaptados e variantes de intensidade/cor."
+  },
+  {
+    "id": "coins",
+    "source": "https://poly.pizza/m/9OWkKczINo",
+    "file": "coins.glb",
+    "download": "https://static.poly.pizza/af8eccc6-bc94-4a31-a4dd-a2d2a1755735.glb.br",
+    "license": "CC0-1.0",
+    "bytes": 168888,
+    "triangles": 3220,
+    "sha256": "30b933c5fcd1fc7e6d0146efe41115ee18f9091ed81d6fa9a1594589dba3e671",
+    "meshes": [
+      "Coin_Pile"
+    ],
+    "author": "Quaternius",
+    "changes": "Escala/orientação normalizadas; materiais adaptados e variantes de intensidade/cor."
+  },
+  {
+    "id": "pipes",
+    "source": "https://poly.pizza/m/GB6AFkoiZb",
+    "file": "pipes.glb",
+    "download": "https://static.poly.pizza/ab52d5ee-95b3-4842-b2b8-27151a67275b.glb.br",
+    "license": "CC0-1.0",
+    "bytes": 20844,
+    "triangles": 688,
+    "sha256": "57b6f324117a1d4ab92b12dedbf272bd8989f9f40638e30d6c9ceec26aee765a",
+    "meshes": [
+      "Pipes"
+    ],
+    "author": "Quaternius",
+    "changes": "Escala/orientação normalizadas; materiais adaptados e variantes de intensidade/cor."
+  },
+  {
+    "id": "drop-alternative",
+    "file": "drop-alternative.glb",
+    "source": "https://poly.pizza/m/OaYT8CWyXx",
+    "license": "CC-BY-3.0",
+    "download": "https://static.poly.pizza/ac6041b8-634b-4ed2-8205-9c94cefd61df.glb.br",
+    "bytes": 10068,
+    "triangles": 80,
+    "sha256": "be584733f7a8a8edbe65f6c2863a47e5f5c6c82de6b48991dbff85946b220731",
+    "materials": [
+      {
+        "name": "water",
+        "base": {
+          "baseColorFactor": [
+            0,
+            0.275006890296936,
+            0.800449252128601,
+            1
+          ],
+          "metallicFactor": 0.400000005960464,
+          "roughnessFactor": 0.272165536880493
+        }
+      }
+    ],
+    "author": "moriarty",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "changes": "Normais suavizadas, material azul brilhante; escala/orientação normalizadas."
+  }
+]

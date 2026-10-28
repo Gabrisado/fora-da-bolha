@@ -17,7 +17,7 @@ for(const size of [{width:320,height:568},{width:360,height:640},{width:390,heig
   const panel=await page.locator('.state-panel').boundingBox();expect(panel!.x).toBeGreaterThanOrEqual(0);expect(panel!.x+panel!.width).toBeLessThanOrEqual(size.width+1);expect(panel!.y+panel!.height).toBeLessThanOrEqual(size.height);
   await expect.poll(()=>page.locator('canvas').evaluate(c=>Math.abs(c.getBoundingClientRect().height-c.closest('.scene')!.getBoundingClientRect().height))).toBeLessThan(1);
   const mapAfter=await page.locator('canvas').boundingBox();expect(mapAfter!.width).toBeGreaterThan(250);expect(mapAfter!.height).toBeGreaterThan(120);
-  await expect.poll(async()=>Number(await page.locator('canvas').getAttribute('data-camera-zoom'))).toBeCloseTo(Math.min(mapAfter!.width/15.5,mapAfter!.height/13),1);
+  await expect.poll(async()=>Number(await page.locator('canvas').getAttribute('data-camera-zoom'))).toBeCloseTo(Math.min(mapAfter!.width/12.6,mapAfter!.height/11.7),1);
   await page.getByRole('button',{name:'Recolher detalhes do estado'}).tap();await expect(page.getByRole('button',{name:'Expandir detalhes do estado'})).toBeVisible();
   await page.getByRole('button',{name:'Expandir detalhes do estado'}).tap();await page.locator('.news').scrollIntoViewIfNeeded();await expect(page.locator('.news h3')).toBeVisible();
   await page.getByRole('button',{name:'Fechar painel do estado'}).tap();
@@ -54,7 +54,7 @@ test('gestos reais de toque giram e aproximam o 3D; toque no mapa seleciona a UF
  const p=new Vector3(x,height,z).project(camera);await page.touchscreen.tap(box.x+(p.x+1)*box.width/2,box.y+(1-p.y)*box.height/2);
  await expect(page.getByRole('heading',{name:'Pará',exact:true})).toBeVisible();await expect(canvas).toBeVisible();
  await expect.poll(()=>canvas.evaluate(c=>Math.abs(c.getBoundingClientRect().height-c.closest('.scene')!.getBoundingClientRect().height))).toBeLessThan(1);
- const selectedBox=(await canvas.boundingBox())!;await expect.poll(zoom).toBeCloseTo(Math.min(selectedBox.width/15.5,selectedBox.height/13),1);
+ const selectedBox=(await canvas.boundingBox())!;await expect.poll(zoom).toBeCloseTo(Math.min(selectedBox.width/12.6,selectedBox.height/11.7),1);
  await page.evaluate(()=>new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve()))));
  await page.screenshot({path:'design/visual-first/mobile/3d-toque-estado.png'});
  const panel=(await page.locator('.state-panel').boundingBox())!;const sx=panel.x+panel.width/2,sy=panel.y+panel.height-25,ey=panel.y+90;

@@ -22,3 +22,10 @@ Fotos próprias com autoria explícita da Agência Senado: reprodução permitid
 
 ## Marca Fora da bolha
 Logo e ícone originais gerados para o projeto com o gerador integrado, aprovados pelo usuário em 27/10/2026. Original em design/brand; versão WebP com transparência em public/brand. Favicon derivado do símbolo, disponibilizado em PNG/ICO, sem fontes ou marcas de terceiros incorporadas.
+
+## Modelos 3D importados — refinamento aprovado
+- Heart, Pistol, Open Book, Coin Piles e Pipes, de Quaternius, e Police Shield, de CreativeTrio: CC0 1.0. https://creativecommons.org/publicdomain/zero/1.0/
+- “Drop water”, de moriarty: https://poly.pizza/m/OaYT8CWyXx, Creative Commons Attribution 3.0: https://creativecommons.org/licenses/by/3.0/. Modificações: normais suavizadas, material azul brilhante, escala e orientação adaptadas.
+- Fontes individuais, tamanhos, contagem de triângulos, hashes e modificações: `public/models/manifest.json`. Arquivos GLB locais; não utilizamos embeds dos marketplaces.
+- Fluxo verde complementar e animações foram criados em código para este projeto. São ilustrações, não registros de despejos ou potabilidade.
+- Motion for React: MIT; licença distribuída com a dependência `motion`.

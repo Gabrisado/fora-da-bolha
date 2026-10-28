@@ -49,7 +49,7 @@ test('Pará exibe bandeira no mapa 3D ao passar o mouse',async({page})=>{
  const rect=await page.locator('canvas').boundingBox();expect(rect).not.toBeNull();
  const f=JSON.parse(readFileSync('public/data/brazil.json','utf8')).features.find((f:any)=>f.properties.codarea==='15');
  const [x,z]=centerOf(f),w=rect!.width,h=rect!.height;
- const camera=new OrthographicCamera(-w/2,w/2,h/2,-h/2,.1,100);camera.position.set(0,15,11);camera.zoom=Math.min(w/15.5,h/13);camera.lookAt(0,0,0);camera.updateProjectionMatrix();camera.updateMatrixWorld();
+ const camera=new OrthographicCamera(-w/2,w/2,h/2,-h/2,.1,100);camera.position.set(0,15,11);camera.zoom=Math.min(w/12.6,h/11.7);camera.lookAt(0,0,0);camera.updateProjectionMatrix();camera.updateMatrixWorld();
  const point=new Vector3(x,.15,z).project(camera);
  await page.mouse.move(rect!.x+(point.x+1)*w/2,rect!.y+(1-point.y)*h/2);
  await expect(page.locator('.map-tooltip')).toContainText('Pará');

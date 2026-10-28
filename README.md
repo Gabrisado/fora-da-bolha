@@ -116,3 +116,12 @@ A triagem de notícias é automática e conservadora pelo assunto do título, ex
 Controles Melhor/Pior e3D/2D têm seleção deslizante; painel recolhe e expande também no desktop. No celular ele sobrepõe o mapa, sem reduzir sua área; toque fora fecha. Cada indicador exibe3representantes de cada extremo (desempate porUF somente para símbolos; classificação estatística preserva empates). São ilustrações, sem inferência de despejos reais ou potabilidade. Movimento reduzido mantém símbolos estáticos; animações pausam quando a aba fica oculta. Os temas Explorar e Migração mantêm suas próprias visualizações.
 
 Atualize os dois novos snapshots com `node scripts/import-health-sanitation.mjs`. O importador valida27UFs e preserva o snapshot anterior se a coleta falhar. Testes específicos: `npx playwright test e2e/motion.spec.ts`. Capturas e revisão desta etapa em `design/review-2026-10-27` e `docs/reviews/2026-10-27-motion-contract.md`. Os relatórios anteriores de mortalidade são históricos e não descrevem o indicador Saúde atual.
+
+## Refinamento do mapa e modelos reais
+A navegação tem destaque deslizante com Motion. As alturas e cores partem do resultado atualmente visível e mudam em 650 ms, inclusive ao sair de Explorar. Símbolos e rotas têm transições de 250 ms, com movimento reduzido respeitado.
+
+O cabeçalho mobile agrupa seletor e visualização na mesma linha. O canvas usa o espaço restante até a navegação inferior; legenda e centralização ficam sobre ele. O painel continua sobreposto e fecha ao tocar fora, sem redimensionar o mapa.
+
+Os sete modelos GLB locais somam 408.668 bytes e são carregados por tema. A gota de moriarty exige atribuição CC BY 3.0; os demais usam CC0. Veja `public/models/manifest.json` e `LICENSES.md`. Se algum modelo falhar, o mapa permanece disponível com símbolo estático e aviso. Nenhum modelo é carregado diretamente de um marketplace durante a visita.
+
+Verificações específicas: `npm test -- tests/map-motion.test.ts tests/model-assets.test.ts` e `npx playwright test e2e/polish.spec.ts`. Referências aprovadas, capturas e medições ficam em `design/visual-first/polish-v2/`. FrameEvidence existe apenas na prévia de desenvolvimento, para observar alturas reais; não é incluído na produção. Medições do Chrome emulado não representam desempenho de um celular físico.
