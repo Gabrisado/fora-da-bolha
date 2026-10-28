@@ -1,0 +1,3 @@
+import type {Row} from './domain';
+export type ExtremeMarker={uf:string;kind:'best'|'worst'};
+export function extremeMarkers(rows:Row[],direction:'higher'|'lower'):ExtremeMarker[]{const valid=rows.filter((r):r is Row&{value:number}=>r.value!==null&&Number.isFinite(r.value));if(valid.length<6)return[];const sorted=[...valid].sort((a,b)=>(direction==='higher'?b.value-a.value:a.value-b.value)||a.uf.localeCompare(b.uf,'en'));const best=sorted.slice(0,3).map(r=>({uf:r.uf,kind:'best' as const}));const worst=[...valid].sort((a,b)=>(direction==='higher'?a.value-b.value:b.value-a.value)||a.uf.localeCompare(b.uf,'en')).filter(r=>!best.some(b=>b.uf===r.uf)).slice(0,3).map(r=>({uf:r.uf,kind:'worst' as const}));return [...best,...worst]}

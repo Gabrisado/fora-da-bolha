@@ -33,7 +33,9 @@ try{
 }catch(e){errors.push('Salário: '+e.message)}
 const pending=[{id:'health',title:'Mortalidade infantil',unit:'óbitos por mil nascidos vivos',direction:'lower',source:'Ministério da Saúde · SIM/SINASC',sourceUrl:'https://www.gov.br/saude/pt-br/acesso-a-informacao/sic/dados-em-transparencia-ativa/svsa/mortalidade'},{id:'education',title:'Ideb · Ensino médio público',unit:'pontos · escala de 0 a 10',direction:'higher',source:'Inep · Ideb',sourceUrl:'https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados'}];
 for(const p of pending)collected.push(old.indicators.find(i=>i.id===p.id&&i.status==='verified')??{...p,period:'Não coletado',collectedAt:null,note:'Fonte em validação. Nenhum valor foi estimado para preencher a ausência.',rows:states.map(s=>({uf:s.uf,value:null})),status:'pending'});
-for(const id of ['security','salary'])if(!collected.some(i=>i.id===id)&&old.indicators.some(i=>i.id===id))collected.push(old.indicators.find(i=>i.id===id));
+for(const id of ['security','salary','sanitation'])if(!collected.some(i=>i.id===id)&&old.indicators.some(i=>i.id===id))collected.push(old.indicators.find(i=>i.id===id));
 await save('indicators.json',{updatedAt:now,indicators:collected,errors});
 try{await readFile(new URL('migration.json',root))}catch{await save('migration.json',{status:'pending',period:'2017–2022',source:'IBGE · Censo 2022',sourceUrl:'https://biblioteca.ibge.gov.br/visualizacao/livros/liv102187.pdf',note:'Matriz oficial origem–destino ainda não coletada. Totais parciais não são usados para inventar trajetos.',flows:[]})}
 await save('collection-log.json',{attemptedAt:now,errors});console.log('Coleta concluída. Problemas:',errors.length);
+
+try{await import('./import-health-sanitation.mjs')}catch(error){console.error('Vida/saneamento: preservado snapshot anterior:',error.message)}

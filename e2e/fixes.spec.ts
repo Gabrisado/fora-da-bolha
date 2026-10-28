@@ -18,9 +18,9 @@ test('sem música e migração funciona em 2D',async({page})=>{
  await page.getByRole('button',{name:'Educação',exact:true}).click();
  await expect(page.getByTestId('indicator-value')).not.toHaveText('—');
  await page.getByRole('button',{name:'Saúde',exact:true}).click();
- await expect(page.getByRole('heading',{name:'Mortalidade geral',exact:true})).toBeVisible();
+ await expect(page.getByRole('heading',{name:'Expectativa de vida ao nascer',exact:true})).toBeVisible();
  await expect(page.getByTestId('indicator-value')).not.toHaveText('—');
- await page.getByRole('button',{name:'Dados e fontes'}).click();await expect(page.getByRole('link',{name:'Baixar tabela das 27 UFs'})).toBeVisible();await page.getByRole('button',{name:'Fechar metodologia'}).click();
+ await page.getByRole('button',{name:'Dados e fontes'}).click();await expect(page.getByRole('link',{name:'Baixar tabela das 27 UFs · Expectativa de vida ao nascer'})).toBeVisible();await page.getByRole('button',{name:'Fechar metodologia'}).click();
  await page.screenshot({path:'design/visual-first/desktop/mortalidade-geral.png'});
 });
 test('todos os arquivos sonoros decodificam e os efeitos não se sobrepõem',async({page})=>{

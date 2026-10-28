@@ -1,9 +1,9 @@
 import {classifyTopics,isPromotional} from '../scripts/news-lib.mjs';
-export type Topic='explore'|'health'|'security'|'education'|'salary'|'migration';
+export type Topic='explore'|'health'|'security'|'education'|'salary'|'migration'|'sanitation';
 export type Row={uf:string;value:number|null;deaths?:number;population?:number};
 export type Flow={from:string;to:string;value:number};
 export type News={uf:string;topic:string;title:string;url:string;publishedAt:string;source:string;institutional:boolean;image?:{src:string;credit:string;originalUrl:string;permissionUrl:string};publisher?:{name:string;initials:string}};
-export type Indicator={id:Topic;title:string;unit:string;direction:'lower'|'higher';period:string;source:string;sourceUrl:string;populationSourceUrl?:string;collectedAt:string;note:string;rows:Row[];status:string};
+export type Indicator={id:Topic;metric?:string;nationalValue?:number;downloadUrl?:string;title:string;unit:string;direction:'lower'|'higher';period:string;source:string;sourceUrl:string;populationSourceUrl?:string;collectedAt:string;note:string;rows:Row[];status:string};
 export type Visual={height:number;color:string;rank:number|null;quality:number|null};
 export function rankValues(rows:Row[],direction:'lower'|'higher'):Record<string,number>{
  const valid=rows.filter((r):r is Row&{value:number}=>r.value!==null&&Number.isFinite(r.value)).sort((a,b)=>direction==='lower'?a.value-b.value:b.value-a.value);

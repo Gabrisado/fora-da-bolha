@@ -1,0 +1,22 @@
+{
+  "collectedAt": "2026-10-28T01:29:14.978Z",
+  "life": {
+    "url": "https://ftp.ibge.gov.br/Projecao_da_Populacao/Projecao_da_Populacao_2024/projecoes_2024_tab4_indicadores.xlsx",
+    "sha256": "0169644992d15a122bc14e42b07d40a3e01fe27303ed2d87cf54fa1f64f00fbc",
+    "sheet": "4) INDICADORES",
+    "column": "e0_T",
+    "year": 2024,
+    "nationalValue": 76.61
+  },
+  "sanitation": {
+    "url": "https://servicodados.ibge.gov.br/api/v3/agregados/7555/periodos/2022/variaveis/1000382?localidades=N3[all]&classificacao=11558[46290]|58[95253]|86[95251]",
+    "sha256": "a1300f52958465fb9bb4c506010c47c19c86f676ab1a973f54695589f4093f70",
+    "table": 7555,
+    "variable": 1000382
+  },
+  "checks": {
+    "life27": true,
+    "sanitation27": true,
+    "finiteBounds": true
+  }
+}
